@@ -20,51 +20,51 @@
       <form class="capitalize flex flex-col gap-3 w-full lg:flex-row">
           <div class="flex flex-col gap-3 lg:w-1/2">
               <div class="flex flex-col">
-                  <label for="judul" class="font-medium">judul</label>
+                  <label for="judul" class="font-medium text-slate-500">judul</label>
                   <input type="text" class="text-black rounded-lg px-3 py-2 capitalize outline-none border border-slate-400" placeholder="judul">
               </div>
               <div class="flex flex-col">
-                  <label for="penulis" class="font-medium">penulis</label>
+                  <label for="penulis" class="font-medium text-slate-500">penulis</label>
                   <input type="text" class="text-black rounded-lg px-3 py-2 capitalize outline-none border border-slate-400" placeholder="penulis">
               </div>
               <div class="flex flex-col">
-                  <label for="penerbit" class="font-medium">penerbit</label>
+                  <label for="penerbit" class="font-medium text-slate-500">penerbit</label>
                   <input type="text" class="text-black rounded-lg px-3 py-2 capitalize outline-none border border-slate-400" placeholder="penerbit">
               </div>
               <div class="flex flex-col">
-                  <label for="ISBN" class="font-medium">ISBN</label>
+                  <label for="ISBN" class="font-medium text-slate-500">ISBN</label>
                   <input type="text" class="text-black rounded-lg px-3 py-2 capitalize outline-none border border-slate-400" placeholder="ISBN">
               </div>
               <div class="flex flex-col">
-                  <label for="tahun_terbit" class="font-medium">tahun terbit</label>
+                  <label for="tahun_terbit" class="font-medium text-slate-500">tahun terbit</label>
                   <input type="text" class="text-black rounded-lg px-3 py-2 capitalize outline-none border border-slate-400" placeholder="tahun terbit">
               </div>
               <div class="flex flex-col">
-                  <label for="nomor_punggung_buku" class="font-medium">nomor punggung buku</label>
+                  <label for="nomor_punggung_buku" class="font-medium text-slate-500">nomor punggung buku</label>
                   <input type="text" class="text-black rounded-lg px-3 py-2 capitalize outline-none border border-slate-400" placeholder="nomor punggung buku">
               </div>
           </div>
           <div class="flex flex-col gap-3 lg:w-1/2">
               <div class="flex flex-col">
-                  <label for="jumlah_halaman" class="font-medium">jumlah halaman</label>
+                  <label for="jumlah_halaman" class="font-medium text-slate-500">jumlah halaman</label>
                   <input type="text" class="text-black rounded-lg px-3 py-2 capitalize outline-none border border-slate-400" placeholder="jumlah halaman">
               </div>
               <div class="flex flex-col">
-                  <label for="keterangan" class="font-medium">keterangan</label>
+                  <label for="keterangan" class="font-medium text-slate-500">keterangan</label>
                   <input type="text" class="text-black rounded-lg px-3 py-2 capitalize outline-none border border-slate-400" placeholder="keterangan">
               </div>
               <div class="flex flex-col w-full">
-                  <label for="foto_buku" class="font-medium">foto buku</label>
+                  <label for="foto_buku" class="font-medium text-slate-500">foto buku</label>
                   <div class="bg-white rounded-lg w-full flex">
                       <input type="file" class="text-black rounded-lg px-3 py-2 capitalize outline-none border border-slate-400 w-full">
                   </div>
               </div>
               <div class="flex flex-col">
-                  <label for="stok" class="font-medium">stok</label>
+                  <label for="stok" class="font-medium text-slate-500">stok</label>
                   <input type="text" class="text-black rounded-lg px-3 py-2 capitalize outline-none border border-slate-400" placeholder="stok">
               </div>
               <div class="flex flex-col">
-                  <label for="rak" class="font-medium">rak</label>
+                  <label for="rak" class="font-medium text-slate-500">rak</label>
                   <select class="text-black rounded-lg px-3 py-2 capitalize outline-none border border-slate-400" placeholder="nomor punggung buku">
                       <option value="1">1</option>
                       <option value="2">2</option>
