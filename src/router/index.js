@@ -5,6 +5,11 @@ import Book from '../views/Books/Index.vue'
 import Member from '../views/Member/Index.vue'
 import Visitor from '../views/Visitor/Index.vue'
 import Borrowing from '../views/Borrowing/Index.vue'
+import Library from '../views/Library/Index.vue'
+import Rack from '../views/Rack/Index.vue'
+import Class from '../views/Class/Index.vue'
+import Major from '../views/Major/Index.vue'
+import Admin from '../views/Admin/Index.vue'
 
 const router = createRouter({
     history: createWebHistory(),
@@ -56,6 +61,11 @@ const router = createRouter({
                     component: Visitor
                 },
                 {
+                    path: '/tambah-pengunjung',
+                    name: 'Visitor.Create',
+                    component: () => import('../views/Visitor/Create.vue')
+                },
+                {
                     path: '/edit-pengunjung/:id',
                     name: 'Visitor.Edit',
                     component: () => import('../views/Visitor/Edit.vue')
@@ -64,7 +74,72 @@ const router = createRouter({
                     path: '/peminjaman',
                     name: 'Borrowing.Index',
                     component: Borrowing
-                }
+                },
+                {
+                    path: '/perpustakaan',
+                    name: 'Library.Index',
+                    component: Library
+                },
+                {
+                    path: '/rak',
+                    name: 'Rack.Index',
+                    component: Rack
+                },
+                {
+                    path: '/tambah-rak',
+                    name: 'Rack.Create',
+                    component: () => import('../views/Rack/Create.vue')
+                },
+                {
+                    path: '/edit-rak/:id',
+                    name: 'Rack.Edit',
+                    component: () => import('../views/Rack/Edit.vue')
+                },
+                {
+                    path: '/kelas',
+                    name: 'Class.Index',
+                    component: Class
+                },
+                {
+                    path: '/tambah-kelas',
+                    name: 'Class.Create',
+                    component: () => import('../views/Class/Create.vue')
+                },
+                {
+                    path: '/edit-kelas/:id',
+                    name: 'Class.Edit',
+                    component: () => import('../views/Class/Edit.vue')
+                },
+                {
+                    path: '/jurusan',
+                    name: 'Jurusan.Index',
+                    component: Major
+                },
+                {
+                    path: '/tambah-jurusan',
+                    name: 'Jurusan.Create',
+                    component: () => import('../views/Major/Create.vue')
+                },
+                {
+                    path: '/edit-jurusan/:id',
+                    name: 'Jurusan.Edit',
+                    component: () => import('../views/Major/Edit.vue')
+                },
+                {
+                    path: '/admin',
+                    name: 'Admin.Index',
+                    component: Admin
+                },
+                {
+                    path: '/tambah-admin',
+                    name: 'Admin.Create',
+                    component: () => import('../views/Admin/Create.vue')
+                },
+                {
+                    path: '/edit-admin/:id',
+                    name: 'Admin.Edit',
+                    component: () => import('../views/Admin/Edit.vue')
+                },
             ]
         }
     ]

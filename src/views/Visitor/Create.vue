@@ -4,16 +4,16 @@
         <router-link to="/dashboard" class="capitalize text-blue-500"
           >dashboard</router-link
         >/
-        <router-link to="/pengunjung" class="capitalize text-blue-500"
+        <router-link to="/anggota" class="capitalize text-blue-500"
           >pengunjung</router-link
         >/
-        <router-link to="/edit-anggota" class="capitalize text-blue-500"
-          >edit pengunjung</router-link
+        <router-link to="/tambah-anggota" class="capitalize text-blue-500"
+          >tambah pengunjung</router-link
         >/
       </div>
       <div>
-        <h1 class="text-2xl font-medium lg:text-3xl">Edit Pengunjung</h1>
-        <p class="capitalize lg:text-lg">selamat datang di edit pengunjung</p>
+        <h1 class="text-2xl font-medium lg:text-3xl">Tambah pengunjung</h1>
+        <p class="capitalize lg:text-lg">selamat datang di tambah pengunjng</p>
       </div>
     </div>
     <div class="bg-white w-full h-max my-8 rounded-3xl px-4 py-3 shadow-sm">
