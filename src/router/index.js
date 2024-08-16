@@ -10,6 +10,7 @@ import Rack from '../views/Rack/Index.vue'
 import Class from '../views/Class/Index.vue'
 import Major from '../views/Major/Index.vue'
 import Admin from '../views/Admin/Index.vue'
+import Profile from '../views/Profile/Index.vue'
 
 const router = createRouter({
     history: createWebHistory(),
@@ -140,6 +141,11 @@ const router = createRouter({
                     name: 'Admin.Edit',
                     component: () => import('../views/Admin/Edit.vue')
                 },
+                {
+                    path: '/profil',
+                    name: 'Profile.Index',
+                    component: Profile
+                }
             ]
         }
     ]
