@@ -18,6 +18,18 @@
                 </div>
             </div>
         </div>
+        <div ref="bookNav" class="bg-white w-4/5 h-20 rounded-3xl shadow-sm relative -top-10 flex flex-row items-center justify-evenly lg:justify-center lg:gap-3 z-0">
+            <router-link to="/tambah-pengunjung" class="flex flex-col items-center lg:flex-row lg:gap-3 lg:bg-white lg:px-3 lg:py-2 lg:rounded-xl lg:shadow-customBoxShadow">
+                <div class="bg-green-200 text-green-600 grid place-content-center text-2xl w-10 h-10 rounded-full"><i class="fa-solid fa-address-book"></i></div>
+                <small class="text-slate-600">Peminjaman</small>
+            </router-link>
+            <span class="w-6 h-6 bg-red-500 rounded-full relative right-8 top-6 text-white text-xs place-content-center font-medium border-2 border-white hidden lg:grid">32</span>
+            <span class="w-6 h-6 bg-red-500 rounded-full relative right-16 text-white text-xs place-content-center font-medium border-2 border-white grid lg:hidden">32</span>
+            <router-link to="/statistik-peminjaman" class="flex flex-col items-center lg:flex-row lg:gap-3 lg:bg-white lg:px-3 lg:py-2 lg:rounded-xl lg:shadow-customBoxShadow">
+                <div class="bg-yellow-200 text-yellow-600 grid place-content-center text-2xl w-10 h-10 rounded-full"><i class="fa-solid fa-chart-simple"></i></div>
+                <small class="text-slate-600 text-xs">Statistik</small>
+            </router-link>
+        </div>
         <div class="bg-white w-full h-12 rounded-xl overflow-hidden shadow-sm my-6">
             <form class="flex items-center">
                 <input type="text" placeholder="cari data peminjaman..." class="w-full h-12 px-6 text-lg outline-none capitalize">

@@ -57,6 +57,11 @@ const router = createRouter({
                     component: () => import('../views/Member/Edit.vue')
                 },
                 {
+                    path: '/statistik-anggota',
+                    name: 'Member.Statistic',
+                    component: () => import('../views/Member/Statistic.vue')
+                },
+                {
                     path: '/pengunjung',
                     name: 'Visitor.Index',
                     component: Visitor
@@ -72,9 +77,19 @@ const router = createRouter({
                     component: () => import('../views/Visitor/Edit.vue')
                 },  
                 {
+                    path: '/statistik-pengunjung',
+                    name: 'Visitor.Statistic',
+                    component: () => import('../views/Visitor/Statistic.vue')
+                },  
+                {
                     path: '/peminjaman',
                     name: 'Borrowing.Index',
                     component: Borrowing
+                },
+                {
+                    path: '/statistik-peminjaman',
+                    name: 'Borrowing.Statistic',
+                    component: () => import('../views/Borrowing/Statistic.vue')
                 },
                 {
                     path: '/perpustakaan',
