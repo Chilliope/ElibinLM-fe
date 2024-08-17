@@ -12,7 +12,7 @@
                     </router-link>
                 </li>
                 <li class="lg:hidden">
-                    <router-link to="" class="text-xl ">
+                    <router-link to="/pre-peminjaman" class="text-xl ">
                         <i class="fa-solid fa-boxes-stacked"></i>
                     </router-link>
                 </li>
