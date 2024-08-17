@@ -87,6 +87,11 @@ const router = createRouter({
                     component: Borrowing
                 },
                 {
+                    path: '/pre-peminjaman',
+                    name: 'Borrowing.Pre',
+                    component: () => import('../views/Borrowing/Pre.vue')
+                },
+                {
                     path: '/statistik-peminjaman',
                     name: 'Borrowing.Statistic',
                     component: () => import('../views/Borrowing/Statistic.vue')

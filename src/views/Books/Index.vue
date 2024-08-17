@@ -53,6 +53,9 @@
                         <form>
                             <button class="bg-red-200 text-red-600 px-3 py-2 rounded-lg hover:bg-red-100 hover:text-red-500 hover:duration-150"><i class="fa-solid fa-trash"></i></button>
                         </form>
+                        <form>
+                            <button class="bg-teal-200 text-teal-600 px-3 py-2 rounded-lg hover:bg-teal-100 hover:text-teal-500 hover:duration-150"><i class="fa-solid fa-cart-plus"></i></button>
+                        </form>
                     </div>
                 </div>
             </div>

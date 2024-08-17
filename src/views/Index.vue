@@ -5,14 +5,29 @@
             <button @click="openSidebar()" class="text-3xl text-slate-500 lg:hidden"><i class="fa-solid fa-bars hover:text-slate-600 hover:duration-150"></i></button>
         </div>
         <div class="mr-6">
-            <button class="flex flex-row items-center gap-4" @click="dropdown()">
-                <div class="hidden lg:block">
-                    <p class="text-slate-600"><span>hai, </span>Erlang Andriyanputra</p>
-                </div>
-                <div>
-                    <img :src="'dummy.avif'" alt="" class="w-10 h-10 object-cover rounded-full">
-                </div>
-            </button>
+            <ul class="flex items-center gap-3">
+                <li class="hidden lg:block">
+                    <router-link to="/pre-peminjaman" class="text-slate-600 hover:text-slate-900 hover:duration-150">
+                        Pre-Peminjaman
+                    </router-link>
+                </li>
+                <li class="lg:hidden">
+                    <router-link to="" class="text-xl ">
+                        <i class="fa-solid fa-boxes-stacked"></i>
+                    </router-link>
+                </li>
+                <div class="bg-red-500 w-6 h-6 rounded-full grid place-content-center text-white text-xs relative right-4 top-2 border-2 border-white">32</div>
+                <li>
+                    <button class="flex flex-row items-center gap-4 text-slate-600 hover:text-slate-900 hover:duration-150" @click="dropdown()">
+                        <div class="hidden lg:block">
+                            <p><span>hai, </span>Erlang Andriyanputra</p>
+                        </div>
+                        <div>
+                            <img :src="'dummy.avif'" alt="" class="w-10 h-10 object-cover rounded-full">
+                        </div>
+                    </button>
+                </li>
+            </ul>
         </div>
     </nav>
     <div ref="dropdownEl" class="bg-white w-44 h-max rounded-xl shadow-sm absolute right-6 top-16 overflow-hidden hidden">
