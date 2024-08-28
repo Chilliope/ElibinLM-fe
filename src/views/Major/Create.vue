@@ -15,14 +15,17 @@
     </div>
   </div>
   <div class="bg-white w-full h-max my-8 rounded-3xl px-4 py-3 shadow-sm">
-    <form class="capitalize flex flex-col gap-3 w-full lg:flex-row">
+    <form @submit.prevent="doCreate()" class="capitalize flex flex-col gap-3 w-full lg:flex-row">
       <div class="flex flex-col gap-3 w-full">
         <div class="flex flex-col">
-          <label for="rak" class="font-medium text-slate-500">jurusan</label>
+          <label for="major" class="font-medium text-slate-500">jurusan</label>
           <input
             type="text"
-            class="text-black rounded-lg px-3 py-2 capitalize outline-none border border-slate-400"
-            placeholder="jurusan"
+            class="text-black rounded-lg px-3 py-2 outline-none border border-slate-400"
+            placeholder="Jurusan"
+            id="major"
+            required
+            v-model="forms.major"
           />
         </div>
         <div class="flex flex-row justify-between pb-8 capitalize">
@@ -41,3 +44,17 @@
     </form>
   </div>
 </template>
+
+<script setup>
+import { reactive } from 'vue'
+import useMajor from '../../service/data/major'
+
+const { create } = useMajor()
+const forms = reactive({
+  major: ''
+})
+
+function doCreate() {
+  create({...forms})
+}
+</script>

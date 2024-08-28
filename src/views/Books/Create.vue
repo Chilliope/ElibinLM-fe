@@ -20,15 +20,15 @@
     <form class="capitalize flex flex-col gap-3 w-full lg:flex-row">
         <div class="flex flex-col gap-3 lg:w-1/2">
             <div class="flex flex-col">
-                <label for="judul" class="font-medium text-slate-500">judul</label>
+                <label for="title" class="font-medium text-slate-500">judul</label>
                 <input type="text" class="text-black rounded-lg px-3 py-2 capitalize outline-none border border-slate-400" placeholder="judul">
             </div>
             <div class="flex flex-col">
-                <label for="penulis" class="font-medium text-slate-500">penulis</label>
+                <label for="writer" class="font-medium text-slate-500">penulis</label>
                 <input type="text" class="text-black rounded-lg px-3 py-2 capitalize outline-none border border-slate-400" placeholder="penulis">
             </div>
             <div class="flex flex-col">
-                <label for="penerbit" class="font-medium text-slate-500">penerbit</label>
+                <label for="publisher" class="font-medium text-slate-500">penerbit</label>
                 <input type="text" class="text-black rounded-lg px-3 py-2 capitalize outline-none border border-slate-400" placeholder="penerbit">
             </div>
             <div class="flex flex-col">
@@ -36,35 +36,35 @@
                 <input type="text" class="text-black rounded-lg px-3 py-2 capitalize outline-none border border-slate-400" placeholder="ISBN">
             </div>
             <div class="flex flex-col">
-                <label for="tahun_terbit" class="font-medium text-slate-500">tahun terbit</label>
+                <label for="publication_year" class="font-medium text-slate-500">tahun terbit</label>
                 <input type="text" class="text-black rounded-lg px-3 py-2 capitalize outline-none border border-slate-400" placeholder="tahun terbit">
             </div>
             <div class="flex flex-col">
-                <label for="nomor_punggung_buku" class="font-medium text-slate-500">nomor punggung buku</label>
+                <label for="book_spine_number" class="font-medium text-slate-500">nomor punggung buku</label>
                 <input type="text" class="text-black rounded-lg px-3 py-2 capitalize outline-none border border-slate-400" placeholder="nomor punggung buku">
             </div>
         </div>
         <div class="flex flex-col gap-3 lg:w-1/2">
             <div class="flex flex-col">
-                <label for="jumlah_halaman" class="font-medium text-slate-500">jumlah halaman</label>
+                <label for="page_size" class="font-medium text-slate-500">jumlah halaman</label>
                 <input type="text" class="text-black rounded-lg px-3 py-2 capitalize outline-none border border-slate-400" placeholder="jumlah halaman">
             </div>
             <div class="flex flex-col">
-                <label for="keterangan" class="font-medium text-slate-500">keterangan</label>
+                <label for="information" class="font-medium text-slate-500">keterangan</label>
                 <input type="text" class="text-black rounded-lg px-3 py-2 capitalize outline-none border border-slate-400" placeholder="keterangan">
             </div>
             <div class="flex flex-col w-full">
-                <label for="foto_buku" class="font-medium text-slate-500">foto buku</label>
+                <label for="image" class="font-medium text-slate-500">foto buku</label>
                 <div class="bg-white rounded-lg w-full flex">
                     <input type="file" class="text-black rounded-lg px-3 py-2 capitalize outline-none border border-slate-400 w-full">
                 </div>
             </div>
             <div class="flex flex-col">
-                <label for="stok" class="font-medium text-slate-500">stok</label>
+                <label for="stock" class="font-medium text-slate-500">stok</label>
                 <input type="text" class="text-black rounded-lg px-3 py-2 capitalize outline-none border border-slate-400" placeholder="stok">
             </div>
             <div class="flex flex-col">
-                <label for="rak" class="font-medium text-slate-500">rak</label>
+                <label for="rack" class="font-medium text-slate-500">rak</label>
                 <select class="text-black rounded-lg px-3 py-2 capitalize outline-none border border-slate-400" placeholder="nomor punggung buku">
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -79,3 +79,22 @@
     </form>
   </div>
 </template>
+
+<script setup>
+import { ref } from 'vue'
+
+const forms = ref({
+    title: '',
+    slug: '',
+    publisher: '',
+    ISBN: '',
+    publication_year: '',
+    book_spine_number: '',
+    page_size: '',
+    information: '',
+    image: '',
+    stock: '',
+    rack_id: ''
+})
+
+</script>

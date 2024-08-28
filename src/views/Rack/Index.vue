@@ -56,16 +56,104 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="bg-white border-b h-14" v-for="item in 10" :key="item">
-          <td class="text-xs lg:text-base">Rak 0{{ item }}</td>
+        <tr class="bg-white border-b h-14" v-for="rack in rack" :key="rack.id">
+          <td class="text-xs lg:text-base">{{ rack.rack }}</td>
           <td class="flex gap-2 justify-center items-center h-14">
-            <router-link to="/edit-rak/1" class="bg-yellow-500 text-white rounded-lg w-max h-max px-2 py-1 lg:px-3 lg:py-2 text-base lg:text-xl hover:bg-yellow-400 hover:duration-150"><i class="fa-regular fa-pen-to-square"></i></router-link>
-            <form>
-                <button class="bg-red-500 text-white rounded-lg w-max h-max px-2 py-1 lg:px-3 lg:py-2 text-base lg:text-xl hover:bg-red-400 hover:duration-150"><i class="fa-solid fa-trash"></i></button>
+            <router-link
+              :to="'/edit-rak/' + rack.id"
+              class="bg-yellow-500 text-white rounded-lg w-max h-max px-2 py-1 lg:px-3 lg:py-2 text-base lg:text-xl hover:bg-yellow-400 hover:duration-150"
+              ><i class="fa-regular fa-pen-to-square"></i
+            ></router-link>
+            <form @submit.prevent="destroy(rack.id)">
+              <button
+                class="bg-red-500 text-white rounded-lg w-max h-max px-2 py-1 lg:px-3 lg:py-2 text-base lg:text-xl hover:bg-red-400 hover:duration-150"
+              >
+                <i class="fa-solid fa-trash"></i>
+              </button>
             </form>
           </td>
         </tr>
       </tbody>
     </table>
   </div>
+
+  <div class="flex justify-end">
+    <div
+      class="bg-white w-full lg:w-1/2 h-max p-3 rounded-full flex justify-between items-center"
+    >
+      <!-- Tombol Previous -->
+      <div>
+        <router-link
+          :to="'' + (parseInt(route.params.page) - 1)"
+          :class="{
+            'text-blue-500': parseInt(route.params.page) > 1,
+            'text-gray-500 pointer-events-none':
+              parseInt(route.params.page) <= 1,
+          }"
+        >
+          <i class="fa-solid fa-circle-chevron-left"></i>
+        </router-link>
+      </div>
+
+      <!-- Pagination Links -->
+      <div>
+        <ul class="flex gap-4">
+          <li v-for="page in totalPage" :key="page">
+            <router-link
+              :to="'' + page"
+              :class="{
+                'font-bold text-blue-500': parseInt(route.params.page) === page,
+                'text-blue-500': parseInt(route.params.page) !== page,
+              }"
+            >
+              {{ page }}
+            </router-link>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Tombol Next -->
+      <div>
+        <router-link
+          :to="'' + (parseInt(route.params.page) + 1)"
+          :class="{
+            'text-blue-500': parseInt(route.params.page) < totalPage,
+            'text-gray-500 pointer-events-none':
+              parseInt(route.params.page) >= totalPage,
+          }"
+        >
+          <i class="fa-solid fa-circle-chevron-right"></i>
+        </router-link>
+      </div>
+    </div>
+  </div>
 </template>
+
+<script setup>
+import { onBeforeMount, onMounted, watch } from "vue";
+import useRack from "../../service/data/rack";
+import { useRoute, useRouter } from "vue-router";
+
+const { rack, getRack, destroy, totalPage } = useRack();
+const route = useRoute();
+
+onMounted(() => {
+  getRack()
+});
+
+// Watch perubahan route.params.page
+watch(
+  () => route.params.page,
+  (newPage, oldPage) => {
+    if (newPage !== oldPage) {
+      if (!sessionStorage.getItem('hasRefreshed')) {
+        sessionStorage.setItem('hasRefreshed', 'true');
+        location.reload();
+      } else {
+        sessionStorage.removeItem('hasRefreshed');
+      }
+    }
+  },
+  { immediate: true }
+);
+</script>

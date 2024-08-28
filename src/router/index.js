@@ -102,9 +102,17 @@ const router = createRouter({
                     component: Library
                 },
                 {
-                    path: '/rak',
+                    path: '/rak/:page',
                     name: 'Rack.Index',
-                    component: Rack
+                    component: Rack,
+                    beforeEnter: (to, from, next) => {
+                        const page = parseInt(to.params.page, 10);
+                        if (isNaN(page) || page <= 0) {
+                            next('/rak/1'); // Redirect to /rak/1 if :page is not valid
+                        } else {
+                            next(); // Continue to the intended route
+                        }
+                    },
                 },
                 {
                     path: '/tambah-rak',
@@ -117,9 +125,17 @@ const router = createRouter({
                     component: () => import('../views/Rack/Edit.vue')
                 },
                 {
-                    path: '/kelas',
+                    path: '/kelas/:page',
                     name: 'Class.Index',
-                    component: Class
+                    component: Class,
+                    beforeEnter: (to, from, next) => {
+                        const page = parseInt(to.params.page, 10);
+                        if (isNaN(page) || page <= 0) {
+                            next('/kelas/1'); // Redirect to /rak/1 if :page is not valid
+                        } else {
+                            next(); // Continue to the intended route
+                        }
+                    },
                 },
                 {
                     path: '/tambah-kelas',
@@ -132,9 +148,17 @@ const router = createRouter({
                     component: () => import('../views/Class/Edit.vue')
                 },
                 {
-                    path: '/jurusan',
+                    path: '/jurusan/:page',
                     name: 'Jurusan.Index',
-                    component: Major
+                    component: Major,
+                    beforeEnter: (to, from, next) => {
+                        const page = parseInt(to.params.page, 10);
+                        if (isNaN(page) || page <= 0) {
+                            next('/jurusan/1'); // Redirect to /rak/1 if :page is not valid
+                        } else {
+                            next(); // Continue to the intended route
+                        }
+                    },
                 },
                 {
                     path: '/tambah-jurusan',
@@ -147,9 +171,17 @@ const router = createRouter({
                     component: () => import('../views/Major/Edit.vue')
                 },
                 {
-                    path: '/admin',
+                    path: '/admin/:page',
                     name: 'Admin.Index',
-                    component: Admin
+                    component: Admin,
+                    beforeEnter: (to, from, next) => {
+                        const page = parseInt(to.params.page, 10);
+                        if (isNaN(page) || page <= 0) {
+                            next('/admin/1'); // Redirect to /rak/1 if :page is not valid
+                        } else {
+                            next(); // Continue to the intended route
+                        }
+                    },
                 },
                 {
                     path: '/tambah-admin',

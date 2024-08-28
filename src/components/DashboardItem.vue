@@ -53,28 +53,28 @@ let cardItem = [
     {
         icon: 'fa-solid fa-sign-hanging',
         name: 'rak buku',
-        href: '/rak',
+        href: '/rak/1',
         color: 'bg-teal-200 text-teal-600',
         value: 15
     },
     {
         icon: 'fa-solid fa-landmark',
         name: 'kelas',
-        href: '/kelas',
+        href: '/kelas/1',
         color: 'bg-cyan-200 text-cyan-600',
         value: 32
     },
     {
         icon: 'fa-solid fa-hammer',
         name: 'jurusan',
-        href: '/jurusan',
+        href: '/jurusan/1',
         color: 'bg-purple-200 text-purple-600',
         value: 8
     },
     {
         icon: 'fa-solid fa-clipboard-user',
         name: 'admin',
-        href: '/admin',
+        href: '/admin/1',
         color: 'bg-lime-200 text-lime-600',
         value: 11
     }
