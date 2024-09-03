@@ -16,6 +16,12 @@ export default function useMajor() {
         totalPage.value = response.data.message.last_page
     }
 
+    async function getAllMajor() {
+        const response = await axios.get('/api/v1/getAllMajor')
+        major.value = response.data.message
+        console.log(major.value)
+    }
+
     async function create(payload) {
         try {
             const response = await axios.post('/api/v1/major', payload)
@@ -64,6 +70,7 @@ export default function useMajor() {
         show,
         edit,
         destroy,
-        totalPage
+        totalPage,
+        getAllMajor
     }
 }

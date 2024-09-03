@@ -35,23 +35,23 @@
             </form>
         </div>
         <div class="w-full grid grid-cols-1 gap-3 lg:grid-cols-2 mt-3">
-            <div v-for="item in 10" :key="item" class="bg-white w-full h-mx px-6 py-3 flex gap-3 rounded-3xl shadow-sm">
+            <div v-for="member in member" :key="member.id" class="bg-white w-full h-mx px-6 py-3 flex gap-3 rounded-3xl shadow-sm">
                 <div>
-                    <img :src="'dummy.avif'" alt="" class="w-32 rounded-full object-cover">
+                    <img :src="'/storage/' + member.image" alt="" class="w-32 rounded-full object-cover">
                 </div>
                 <div class="flex flex-col gap-2 w-full">
                     <div class="flex flex-col gap-2">
                         <div class="w-full h-max">
-                            <h5 class="font-medium">Erlang Andriyanputra</h5>
-                            <small class="xl:text-base">@10234</small>
+                            <h5 class="font-medium">{{ member.name }}</h5>
+                            <small class="xl:text-base">@{{ member.NIS }}</small>
                         </div>
                         <div>
-                            <p class="text-xs text-slate-600">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi corporis iste ducimus nisi unde deserunt?.</p>
+                            <p class="text-xs text-slate-600">{{ member.address }}</p>
                         </div>
                     </div>
                     <div class="flex flex-row gap-3 h-full ">
-                        <router-link to="/edit-anggota/1" class="bg-blue-200 text-blue-600 px-3 py-2 rounded-lg hover:bg-blue-100 hover:text-blue-500 hover:duration-150"><i class="fa-regular fa-pen-to-square"></i></router-link>
-                        <form>
+                        <router-link :to="'/edit-anggota/' + member.id" class="bg-blue-200 text-blue-600 px-3 py-2 rounded-lg hover:bg-blue-100 hover:text-blue-500 hover:duration-150"><i class="fa-regular fa-pen-to-square"></i></router-link>
+                        <form @submit.prevent="destroy(member.id)">
                             <button class="bg-red-200 text-red-600 px-3 py-2 rounded-lg hover:bg-red-100 hover:text-red-500 hover:duration-150"><i class="fa-solid fa-trash"></i></button>
                         </form>
                     </div>
@@ -60,3 +60,14 @@
         </div>
     </div>
 </template>
+
+<script setup>
+import { onMounted } from 'vue'
+import useMember from '../../service/data/member'
+
+const { member, getMember, destroy } = useMember()
+
+onMounted(() => {
+    getMember()
+})
+</script>

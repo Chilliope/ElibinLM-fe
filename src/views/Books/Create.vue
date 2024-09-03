@@ -17,58 +17,56 @@
     </div>
   </div>
   <div class="bg-white w-full h-max my-8 rounded-3xl px-4 py-3 shadow-sm">
-    <form class="capitalize flex flex-col gap-3 w-full lg:flex-row">
+    <form @submit.prevent="doCreate()" enctype="multipart/form-data" class="capitalize flex flex-col gap-3 w-full lg:flex-row">
         <div class="flex flex-col gap-3 lg:w-1/2">
             <div class="flex flex-col">
                 <label for="title" class="font-medium text-slate-500">judul</label>
-                <input type="text" class="text-black rounded-lg px-3 py-2 capitalize outline-none border border-slate-400" placeholder="judul">
+                <input required type="text" class="text-black rounded-lg px-3 py-2 outline-none border border-slate-400" placeholder="Judul" id="title" v-model="forms.title">
             </div>
             <div class="flex flex-col">
                 <label for="writer" class="font-medium text-slate-500">penulis</label>
-                <input type="text" class="text-black rounded-lg px-3 py-2 capitalize outline-none border border-slate-400" placeholder="penulis">
+                <input required type="text" class="text-black rounded-lg px-3 py-2 outline-none border border-slate-400" placeholder="Penulis" id="writer" v-model="forms.writer">
             </div>
             <div class="flex flex-col">
                 <label for="publisher" class="font-medium text-slate-500">penerbit</label>
-                <input type="text" class="text-black rounded-lg px-3 py-2 capitalize outline-none border border-slate-400" placeholder="penerbit">
+                <input required type="text" class="text-black rounded-lg px-3 py-2 outline-none border border-slate-400" placeholder="Penerbit" id="publisher" v-model="forms.publisher">
             </div>
             <div class="flex flex-col">
                 <label for="ISBN" class="font-medium text-slate-500">ISBN</label>
-                <input type="text" class="text-black rounded-lg px-3 py-2 capitalize outline-none border border-slate-400" placeholder="ISBN">
+                <input required type="text" class="text-black rounded-lg px-3 py-2 outline-none border border-slate-400" placeholder="ISBN" id="ISBN" v-model="forms.ISBN">
             </div>
             <div class="flex flex-col">
                 <label for="publication_year" class="font-medium text-slate-500">tahun terbit</label>
-                <input type="text" class="text-black rounded-lg px-3 py-2 capitalize outline-none border border-slate-400" placeholder="tahun terbit">
+                <input required type="text" class="text-black rounded-lg px-3 py-2 outline-none border border-slate-400" placeholder="Tahun Terbit" id="publication_year" v-model="forms.publication_year">
             </div>
             <div class="flex flex-col">
                 <label for="book_spine_number" class="font-medium text-slate-500">nomor punggung buku</label>
-                <input type="text" class="text-black rounded-lg px-3 py-2 capitalize outline-none border border-slate-400" placeholder="nomor punggung buku">
+                <input required type="text" class="text-black rounded-lg px-3 py-2 outline-none border border-slate-400" placeholder="Nomor Punggung Buku" id="book_spine_number" v-model="forms.book_spine_number">
             </div>
         </div>
         <div class="flex flex-col gap-3 lg:w-1/2">
             <div class="flex flex-col">
                 <label for="page_size" class="font-medium text-slate-500">jumlah halaman</label>
-                <input type="text" class="text-black rounded-lg px-3 py-2 capitalize outline-none border border-slate-400" placeholder="jumlah halaman">
+                <input required type="text" class="text-black rounded-lg px-3 py-2 outline-none border border-slate-400" placeholder="Jumlah Halaman" id="page_size" v-model="forms.page_size">
             </div>
             <div class="flex flex-col">
                 <label for="information" class="font-medium text-slate-500">keterangan</label>
-                <input type="text" class="text-black rounded-lg px-3 py-2 capitalize outline-none border border-slate-400" placeholder="keterangan">
+                <input required type="text" class="text-black rounded-lg px-3 py-2 outline-none border border-slate-400" placeholder="Keterangan" id="information" v-model="forms.information">
             </div>
             <div class="flex flex-col w-full">
                 <label for="image" class="font-medium text-slate-500">foto buku</label>
                 <div class="bg-white rounded-lg w-full flex">
-                    <input type="file" class="text-black rounded-lg px-3 py-2 capitalize outline-none border border-slate-400 w-full">
+                    <input required type="file" @change="handleFileUpload" class="text-black rounded-lg px-3 py-2 outline-none border border-slate-400 w-full" id="image">
                 </div>
             </div>
             <div class="flex flex-col">
                 <label for="stock" class="font-medium text-slate-500">stok</label>
-                <input type="text" class="text-black rounded-lg px-3 py-2 capitalize outline-none border border-slate-400" placeholder="stok">
+                <input required type="number" class="text-black rounded-lg px-3 py-2 outline-none border border-slate-400" placeholder="Stok" id="stock" v-model="forms.stock">
             </div>
             <div class="flex flex-col">
                 <label for="rack" class="font-medium text-slate-500">rak</label>
-                <select class="text-black rounded-lg px-3 py-2 capitalize outline-none border border-slate-400" placeholder="nomor punggung buku">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
+                <select class="text-black rounded-lg px-3 py-2 outline-none border border-slate-400" id="rack" v-model="forms.rack_id">
+                    <option v-for="rack in rack" :key="rack.id" :value="rack.id">{{ rack.rack }}</option>
                 </select>
             </div>
             <div class="flex flex-row justify-between pb-8 capitalize">
@@ -81,20 +79,40 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
+import useBook from '../../service/data/book'
+import useRack from '../../service/data/rack'
+
+const { create } = useBook()
+const { rack, getAllRack } = useRack()
 
 const forms = ref({
     title: '',
-    slug: '',
+    writer: '',
     publisher: '',
     ISBN: '',
     publication_year: '',
     book_spine_number: '',
     page_size: '',
     information: '',
-    image: '',
+    image: null,
     stock: '',
     rack_id: ''
 })
 
+onMounted(() => {
+    getAllRack()
+})
+
+function handleFileUpload(event) {
+    forms.value.image = event.target.files[0]
+}
+
+function doCreate() {
+    const formData = new FormData()
+    for (const key in forms.value) {
+        formData.append(key, forms.value[key])
+    }
+    create(formData)
+}
 </script>

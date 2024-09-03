@@ -9,17 +9,16 @@ export default function useRack() {
     const { accepted, rejected, confirm } = useSwal()
     const route = useRoute()
     const router = useRouter()
-
-    const isRefresh = false
-
-    if(isRefresh === false) {
-        
-    }
     
     async function getRack() {
         const response = await axios.get(`/api/v1/rack?page=${route.params.page}`)
         rack.value = response.data.data.data
         totalPage.value = response.data.data.last_page
+    }
+
+    async function getAllRack() {
+        const response = await axios.get('/api/v1/getAllRack')
+        rack.value = response.data.data
     } 
 
     async function create(payload) {
@@ -69,6 +68,7 @@ export default function useRack() {
         show,
         edit,
         destroy,
-        totalPage
+        totalPage,
+        getAllRack
     }
 }

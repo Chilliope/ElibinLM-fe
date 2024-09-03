@@ -17,6 +17,11 @@ export default function useClass() {
         totalPage.value = response.data.data.last_page
     }
 
+    async function getAllClass() {
+        const response = await axios.get('/api/v1/getAllClass')
+        classData.value = response.data.data
+    }
+
     async function create(payload) {
         try {
             const response = await axios.post('/api/v1/class', payload)
@@ -67,6 +72,7 @@ export default function useClass() {
         majorClass,
         edit,
         destroy,
-        totalPage
+        totalPage,
+        getAllClass
     }
 }

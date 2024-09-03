@@ -31,26 +31,27 @@
             </form>
         </div>
         <div class="w-full grid grid-cols-1 gap-3 lg:grid-cols-2 mt-3">
-            <div v-for="item in 10" :key="item" class="bg-white w-full h-mx px-6 py-3 flex gap-3 rounded-3xl shadow-sm">
+            <div v-for="book in book" :key="book.slug" class="bg-white w-full h-mx px-6 py-3 flex gap-3 rounded-3xl shadow-sm">
                 <div>
-                    <img :src="'bukujs.jpg'" alt="jpg" class="w-60 h-60 object-cover rounded-3xl lg:h-60">
+                    <img :src="'/storage/' + book.image" alt="jpg" class="w-60 h-60 object-cover rounded-3xl lg:h-60">
                 </div>
                 <div class="flex flex-col gap-2 w-full">
                     <div class="flex flex-col gap-2">
                         <div class="w-full h-max">
-                            <h5 class="font-medium">Lancar Java & Javascript</h5>
+                            <h5 class="font-medium">{{ book.title }}</h5>
                         </div>
                         <div>
-                            <div class="capitalize">penulis: <span>Mr.Lorem</span></div>
-                            <div class="capitalize">stok buku: <span>32</span></div>
+                            <div class="capitalize">penulis: <span>{{ book.writer }}</span></div>
+                            <div class="capitalize">stok buku: <span>{{ book.stock }}</span></div>
+                            <div class="capitalize">rak: <span>{{ book.rack.rack }}</span></div>
                         </div>
                         <div>
-                            <p class="text-xs text-slate-600">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi corporis iste ducimus nisi unde deserunt?.</p>
+                            <p class="text-xs text-slate-600">{{ book.information }}</p>
                         </div>
                     </div>
                     <div class="flex flex-row gap-3 h-full justify-end items-end">
-                        <router-link to="/edit-koleksi/title-title" class="bg-blue-200 text-blue-600 px-3 py-2 rounded-lg hover:bg-blue-100 hover:text-blue-500 hover:duration-150"><i class="fa-regular fa-pen-to-square"></i></router-link>
-                        <form>
+                        <router-link :to="'/edit-koleksi/' + book.slug" class="bg-blue-200 text-blue-600 px-3 py-2 rounded-lg hover:bg-blue-100 hover:text-blue-500 hover:duration-150"><i class="fa-regular fa-pen-to-square"></i></router-link>
+                        <form @submit.prevent="destroy(book.slug)">
                             <button class="bg-red-200 text-red-600 px-3 py-2 rounded-lg hover:bg-red-100 hover:text-red-500 hover:duration-150"><i class="fa-solid fa-trash"></i></button>
                         </form>
                         <form>
@@ -62,3 +63,14 @@
         </div>
     </div>
 </template>
+
+<script setup>
+import { onMounted } from 'vue'
+import useBook from '../../service/data/book'
+
+const { getBook, book, destroy } = useBook()
+
+onMounted(() => {
+    getBook()
+})
+</script>
