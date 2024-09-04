@@ -10,8 +10,11 @@ export default function useMember() {
     const route = useRoute()
     const router = useRouter()
 
-    async function getMember() {
-        const response = await axios.get(`/api/v1/member?page=${route.params.page}`)
+    async function getMember(search) {
+        if(search == undefined) {
+            search = ''
+        }
+        const response = await axios.get(`/api/v1/member?page=${route.params.page}&search=${search}`)
         member.value = response.data.data.data
         totalPage.value = response.data.data.last_page
     }

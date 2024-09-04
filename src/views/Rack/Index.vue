@@ -40,12 +40,10 @@
       <form class="flex items-center">
         <input
           type="text"
-          placeholder="cari rak buku..."
-          class="w-full h-12 px-6 text-lg outline-none capitalize"
+          placeholder="Cari Rak Buku..."
+          class="w-full h-12 px-6 text-lg outline-none"
+          v-model="search"
         />
-        <button class="w-max bg-blue-500 text-white px-4 h-8 rounded-xl mr-4">
-          Cari
-        </button>
       </form>
     </div>
     <table class="my-4 table-auto w-full text-center">
@@ -130,22 +128,29 @@
 </template>
 
 <script setup>
-import { onBeforeMount, onMounted, watch } from "vue";
+import { onMounted, watch, ref } from "vue";
 import useRack from "../../service/data/rack";
 import { useRoute, useRouter } from "vue-router";
 
 const { rack, getRack, destroy, totalPage } = useRack();
 const route = useRoute();
 
-onMounted(() => {
-  getRack()
-});
+const search = ref('');
+
 
 // Watch perubahan route.params.page
 watch(
   () => route.params.page,
   () => {
-    getRack()
+    getRack(search.value)
   }
 );
+
+watch(search, (newSearch) => {
+  getRack(newSearch); // Fetch data in real-time as the search input changes
+});
+
+onMounted(() => {
+  getRack(search.value)
+});
 </script>

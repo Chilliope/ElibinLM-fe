@@ -10,8 +10,12 @@ export default function useRack() {
     const route = useRoute()
     const router = useRouter()
     
-    async function getRack() {
-        const response = await axios.get(`/api/v1/rack?page=${route.params.page}`)
+    async function getRack(search) {
+        if(search == undefined) {
+            search = ''
+        }
+
+        const response = await axios.get(`/api/v1/rack?page=${route.params.page}&search=${search}`)
         rack.value = response.data.data.data
         totalPage.value = response.data.data.last_page
     }

@@ -30,7 +30,7 @@
         </div>
         <div class="bg-white w-full h-12 rounded-xl overflow-hidden shadow-sm">
             <form class="flex items-center">
-                <input type="text" placeholder="cari anggota perpustakaan..." class="w-full h-12 px-6 text-lg outline-none capitalize">
+                <input type="text" placeholder="Cari Anggota Perpustakaan..." class="w-full h-12 px-6 text-lg outline-none" v-model="search">
                 <button class="w-max bg-blue-500 text-white px-4 h-8 rounded-xl mr-4">Cari</button>
             </form>
         </div>
@@ -113,22 +113,28 @@
 </template>
 
 <script setup>
-import { onMounted, watch } from 'vue'
+import { onMounted, watch, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import useMember from '../../service/data/member'
 
 const route = useRoute()
 const { member, getMember, destroy, totalPage } = useMember()
+const search = ref('')
 
-onMounted(() => {
-    getMember()
-})
 
 // Watch perubahan route.params.page
 watch(
   () => route.params.page,
   () => {
-    getMember(); // Reload books when the page parameter changes
+    getMember(search.value); // Reload books when the page parameter changes
   }
 );
+
+watch(search, (newSearch) => {
+  getMember(newSearch)
+})
+
+onMounted(() => {
+    getMember(search.value)
+})
 </script>

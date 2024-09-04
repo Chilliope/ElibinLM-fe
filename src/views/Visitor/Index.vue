@@ -30,8 +30,7 @@
         </div>
         <div class="bg-white w-full h-12 rounded-xl overflow-hidden shadow-sm">
             <form class="flex items-center">
-                <input type="text" placeholder="cari pengunjung perpustakaan..." class="w-full h-12 px-6 text-lg outline-none capitalize">
-                <button class="w-max bg-blue-500 text-white px-4 h-8 rounded-xl mr-4">Cari</button>
+                <input type="text" placeholder="Cari Pengunjung Perpustakaan..." class="w-full h-12 px-6 text-lg outline-none" v-model="search">
             </form>
         </div>
         <div class="w-full grid grid-cols-1 gap-3 lg:grid-cols-2 mt-3">
@@ -110,21 +109,27 @@
 </template>
 
 <script setup>
-import { onMounted, watch } from 'vue'
+import { onMounted, watch, ref } from 'vue'
 import useVisitor from '../../service/data/visitor'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
 const { visitor, getVisitor, destroy, totalPage } = useVisitor()
+const search = ref('')
 
-onMounted(() => {
-    getVisitor()
-})
 
 watch(
-    () => route.params.page,
-    () => {
-        getVisitor()
-    }
+  () => route.params.page,
+  () => {
+    getVisitor(search.value)
+  }
 )
+
+watch(search, (newSearch) => {
+  getVisitor(newSearch)
+});
+
+onMounted(() => {
+    getVisitor(search.value)
+})
 </script>

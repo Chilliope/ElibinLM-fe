@@ -11,8 +11,11 @@ export default function useClass() {
     const router = useRouter()
     const route = useRoute()
 
-    async function getClass() {
-        const response = await axios.get(`/api/v1/class?page=${route.params.page}`)
+    async function getClass(search) {
+        if(search == undefined) {
+            search = ''
+        }
+        const response = await axios.get(`/api/v1/class?page=${route.params.page}&search=${search}`)
         classData.value = response.data.data.data
         totalPage.value = response.data.data.last_page
     }

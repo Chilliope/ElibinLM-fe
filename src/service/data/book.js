@@ -10,8 +10,12 @@ export default function useBook() {
     const book = ref([])
     const totalPage = ref([])
 
-    async function getBook() {
-        const response = await axios.get(`/api/v1/book?page=${route.params.page}`)
+    async function getBook(search) {
+        if(search == undefined) {
+            search = ''
+        }
+
+        const response = await axios.get(`/api/v1/book?page=${route.params.page}&search=${search}`)
         book.value = response.data.data.data
         totalPage.value = response.data.data.last_page
     }

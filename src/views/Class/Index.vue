@@ -42,12 +42,10 @@
       <form class="flex items-center">
         <input
           type="text"
-          placeholder="cari rak buku..."
-          class="w-full h-12 px-6 text-lg outline-none capitalize"
+          placeholder="Cari Kelas..."
+          class="w-full h-12 px-6 text-lg outline-none"
+          v-model="search"
         />
-        <button class="w-max bg-blue-500 text-white px-4 h-8 rounded-xl mr-4">
-          Cari
-        </button>
       </form>
     </div>
     <table class="my-4 table-auto w-full text-center">
@@ -139,7 +137,7 @@
 </template>
 
 <script setup>
-import { onMounted, watch } from "vue";
+import { onMounted, watch, ref } from "vue";
 import useClass from "../../service/data/class";
 import { useRoute, useRouter } from "vue-router";
 
@@ -147,15 +145,22 @@ const route = useRoute();
 
 const { classData, getClass, destroy, totalPage } = useClass();
 
-onMounted(() => {
-  getClass();
-});
+const search = ref('')
+
 
 // Watch perubahan route.params.page
 watch(
   () => route.params.page,
   () => {
-    getClass()
+    getClass(search.value)
   }
 );
+
+watch(search, (newSearch) => {
+  getClass(newSearch)
+});
+
+onMounted(() => {
+  getClass(search.value);
+});
 </script>

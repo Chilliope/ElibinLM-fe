@@ -10,8 +10,11 @@ export default function useMajor() {
     const route = useRoute()
     const router = useRouter()
 
-    async function getMajor() {
-        const response = await axios.get(`/api/v1/major?page=${route.params.page}`)
+    async function getMajor(search) {
+        if(search == undefined) {
+            search = ''
+        }
+        const response = await axios.get(`/api/v1/major?page=${route.params.page}&search=${search}`)
         major.value = response.data.message.data
         totalPage.value = response.data.message.last_page
     }

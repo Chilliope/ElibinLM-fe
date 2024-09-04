@@ -10,8 +10,11 @@ export default function useVisitor() {
     const router = useRouter()
     const { accepted, rejected, confirm } = useSwal()
 
-    async function getVisitor() {
-        const response = await axios.get(`/api/v1/visitor?page=${route.params.page}`)
+    async function getVisitor(search) {
+        if(search == undefined) {
+            search = ''
+        }
+        const response = await axios.get(`/api/v1/visitor?page=${route.params.page}&search=${search}`)
         visitor.value = response.data.data.data
         totalPage.value = response.data.data.last_page
     }

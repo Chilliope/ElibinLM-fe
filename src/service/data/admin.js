@@ -10,8 +10,11 @@ export default function useAdmin() {
     const route = useRoute()
     const router = useRouter()
 
-    async function getAdmin() {
-        const response = await axios.get(`/api/v1/admin?page=${route.params.page}`)
+    async function getAdmin(search) {
+        if(search == undefined) {
+            search = ''
+        }
+        const response = await axios.get(`/api/v1/admin?page=${route.params.page}&search=${search}`)
         admin.value = response.data.data.data
         totalPage.value = response.data.data.last_page
     }
