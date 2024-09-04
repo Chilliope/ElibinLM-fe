@@ -150,16 +150,8 @@ onMounted(() => {
 // Watch perubahan route.params.page
 watch(
   () => route.params.page,
-  (newPage, oldPage) => {
-    if (newPage !== oldPage) {
-      if (!sessionStorage.getItem("hasRefreshed")) {
-        sessionStorage.setItem("hasRefreshed", "true");
-        location.reload();
-      } else {
-        sessionStorage.removeItem("hasRefreshed");
-      }
-    }
-  },
-  { immediate: true }
+  () => {
+    getMajor()
+  }
 );
 </script>

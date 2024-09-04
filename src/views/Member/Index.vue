@@ -59,15 +59,76 @@
             </div>
         </div>
     </div>
+
+    <div class="flex justify-end mt-8">
+    <div
+      class="bg-white w-full lg:w-1/2 h-max p-3 rounded-full flex justify-between items-center"
+    >
+      <!-- Tombol Previous -->
+      <div>
+        <router-link
+          :to="'' + (parseInt(route.params.page) - 1)"
+          :class="{
+            'text-blue-500': parseInt(route.params.page) > 1,
+            'text-gray-500 pointer-events-none':
+              parseInt(route.params.page) <= 1,
+          }"
+        >
+          <i class="fa-solid fa-circle-chevron-left"></i>
+        </router-link>
+      </div>
+
+      <!-- Pagination Links -->
+      <div>
+        <ul class="flex gap-4">
+          <li v-for="page in totalPage" :key="page">
+            <router-link
+              :to="'' + page"
+              :class="{
+                'font-bold text-blue-500': parseInt(route.params.page) === page,
+                'text-blue-500': parseInt(route.params.page) !== page,
+              }"
+            >
+              {{ page }}
+            </router-link>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Tombol Next -->
+      <div>
+        <router-link
+          :to="'' + (parseInt(route.params.page) + 1)"
+          :class="{
+            'text-blue-500': parseInt(route.params.page) < totalPage,
+            'text-gray-500 pointer-events-none':
+              parseInt(route.params.page) >= totalPage,
+          }"
+        >
+          <i class="fa-solid fa-circle-chevron-right"></i>
+        </router-link>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script setup>
-import { onMounted } from 'vue'
+import { onMounted, watch } from 'vue'
+import { useRoute } from 'vue-router'
 import useMember from '../../service/data/member'
 
-const { member, getMember, destroy } = useMember()
+const route = useRoute()
+const { member, getMember, destroy, totalPage } = useMember()
 
 onMounted(() => {
     getMember()
 })
+
+// Watch perubahan route.params.page
+watch(
+  () => route.params.page,
+  () => {
+    getMember(); // Reload books when the page parameter changes
+  }
+);
 </script>

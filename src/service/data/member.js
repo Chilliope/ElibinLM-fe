@@ -5,13 +5,15 @@ import { useRoute, useRouter } from 'vue-router'
 
 export default function useMember() {
     const member = ref([])
+    const totalPage = ref([])
     const { accepted, rejected, confirm } = useSwal()
     const route = useRoute()
     const router = useRouter()
 
     async function getMember() {
-        const response = await axios.get('/api/v1/member')
-        member.value = response.data.data
+        const response = await axios.get(`/api/v1/member?page=${route.params.page}`)
+        member.value = response.data.data.data
+        totalPage.value = response.data.data.last_page
     }
 
     async function show() {
@@ -61,6 +63,7 @@ export default function useMember() {
         create,
         show,
         update,
-        destroy
+        destroy,
+        totalPage
     }
 }

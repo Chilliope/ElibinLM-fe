@@ -97,11 +97,11 @@
             :to="item.href"
             :class="[
               'px-3 py-1 rounded-xl w-full flex items-center capitalize hover:bg-blue-100 hover:duration-150',
-              isActive(item.href) ? 'bg-blue-500 text-white' : '',
+              isActive(item.name) ? 'bg-blue-500 text-white' : '',
             ]"
           >
             <i :class="item.icon + ' w-7'"></i>
-            {{ item.name }}
+            {{ item.title }}
           </router-link>
         </li>
       </ul>
@@ -150,9 +150,9 @@ import { useRoute, useRouter } from "vue-router";
 
 const route = useRoute();
 
-function isActive(href) {
+function isActive(name) {
   // Memeriksa apakah path saat ini termasuk href
-  return route.path.startsWith(href);
+  return route.name.startsWith(name);
 }
 
 let dropdownEl = ref(null);
@@ -194,56 +194,68 @@ const dropdownItem = [
   },
 ];
 
+const page = null
+
 const sideItem = [
   {
     icon: "fa-solid fa-gauge",
-    name: "dashboard",
+    title: "dashboard",
+    name: 'Dashboard',
     href: "/dashboard",
   },
   {
     icon: "fa-solid fa-book",
-    name: "koleksi buku",
-    href: "/koleksi-buku",
+    title: "koleksi buku",
+    name: "Books",
+    href: "/koleksi-buku/" + 1,
   },
   {
     icon: "fa-solid fa-users",
-    name: "anggota",
-    href: "/anggota",
+    title: "anggota",
+    name: 'Member',
+    href: "/anggota/" + 1,
   },
   {
     icon: "fa-solid fa-user-secret",
-    name: "pengunjung",
-    href: "/pengunjung",
+    title: "pengunjung",
+    name: 'Visitor',
+    href: "/pengunjung/" + 1,
   },
   {
     icon: "fa-solid fa-clipboard",
-    name: "peminjaman",
+    title: "peminjaman",
+    name: 'Borrowing',
     href: "/peminjaman",
   },
   {
     icon: "fa-solid fa-building",
-    name: "perpustakaan",
+    title: "perpustakaan",
+    name: 'Library',
     href: "/perpustakaan",
   },
   {
     icon: "fa-solid fa-sign-hanging",
-    name: "rak buku",
-    href: "/rak/" + route.params.page,
+    title: "rak buku",
+    name: "Rack",
+    href: "/rak/" + 1,
   },
   {
     icon: "fa-solid fa-landmark",
-    name: "kelas",
-    href: "/kelas/" + route.params.page,
+    title: "kelas",
+    name: "Class",
+    href: "/kelas/" + 1,
   },
   {
     icon: "fa-solid fa-hammer",
-    name: "jurusan",
-    href: "/jurusan/" + route.params.page,
+    title: "jurusan",
+    name: 'Major',
+    href: "/jurusan/" + 1,
   },
   {
     icon: "fa-solid fa-clipboard-user",
-    name: "admin",
-    href: "/admin/" + route.params.page,
+    title: "admin",
+    name: 'Admin',
+    href: "/admin/" + 1,
   },
 ];
 </script>

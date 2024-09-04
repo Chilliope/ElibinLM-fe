@@ -5,13 +5,15 @@ import useSwal from '../swal'
 
 export default function useVisitor() {
     const visitor = ref([])
+    const totalPage = ref([])
     const route = useRoute()
     const router = useRouter()
     const { accepted, rejected, confirm } = useSwal()
 
     async function getVisitor() {
-        const response = await axios.get('/api/v1/visitor')
-        visitor.value = response.data.data
+        const response = await axios.get(`/api/v1/visitor?page=${route.params.page}`)
+        visitor.value = response.data.data.data
+        totalPage.value = response.data.data.last_page
     }
 
     async function show() {
@@ -61,6 +63,7 @@ export default function useVisitor() {
         show,
         create,
         update,
-        destroy
+        destroy,
+        totalPage
     }
 }

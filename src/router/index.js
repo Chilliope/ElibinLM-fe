@@ -27,9 +27,17 @@ const router = createRouter({
                     component: Dashboard
                 },
                 {
-                    path: '/koleksi-buku',
+                    path: '/koleksi-buku/:page',
                     name: 'Books.Index',
-                    component: Book
+                    component: Book,
+                    beforeEnter: (to, from, next) => {
+                        const page = parseInt(to.params.page, 10);
+                        if (isNaN(page) || page <= 0) {
+                            next('/koleksi-buku/1'); // Redirect to /koleksi-buku/1 if :page is not valid
+                        } else {
+                            next(); // Continue to the intended route
+                        }
+                    },
                 },
                 {
                     path: '/tambah-koleksi',
@@ -42,9 +50,17 @@ const router = createRouter({
                     component: () => import('../views/Books/Edit.vue')
                 },
                 {
-                    path: '/anggota',
+                    path: '/anggota/:page',
                     name: 'Member.Index',
-                    component: Member
+                    component: Member,
+                    beforeEnter: (to, from, next) => {
+                        const page = parseInt(to.params.page, 10);
+                        if (isNaN(page) || page <= 0) {
+                            next('/anggota/1'); // Redirect to /anggota/1 if :page is not valid
+                        } else {
+                            next(); // Continue to the intended route
+                        }
+                    },
                 },
                 {
                     path: '/tambah-anggota',
@@ -62,9 +78,17 @@ const router = createRouter({
                     component: () => import('../views/Member/Statistic.vue')
                 },
                 {
-                    path: '/pengunjung',
+                    path: '/pengunjung/:page',
                     name: 'Visitor.Index',
-                    component: Visitor
+                    component: Visitor,
+                    beforeEnter: (to, from, next) => {
+                        const page = parseInt(to.params.page, 10);
+                        if (isNaN(page) || page <= 0) {
+                            next('/pengunjung/1'); // Redirect to /pengunjung/1 if :page is not valid
+                        } else {
+                            next(); // Continue to the intended route
+                        }
+                    },
                 },
                 {
                     path: '/tambah-pengunjung',
@@ -131,7 +155,7 @@ const router = createRouter({
                     beforeEnter: (to, from, next) => {
                         const page = parseInt(to.params.page, 10);
                         if (isNaN(page) || page <= 0) {
-                            next('/kelas/1'); // Redirect to /rak/1 if :page is not valid
+                            next('/kelas/1'); // Redirect to /kelas/1 if :page is not valid
                         } else {
                             next(); // Continue to the intended route
                         }
@@ -149,7 +173,7 @@ const router = createRouter({
                 },
                 {
                     path: '/jurusan/:page',
-                    name: 'Jurusan.Index',
+                    name: 'Major.Index',
                     component: Major,
                     beforeEnter: (to, from, next) => {
                         const page = parseInt(to.params.page, 10);
@@ -162,12 +186,12 @@ const router = createRouter({
                 },
                 {
                     path: '/tambah-jurusan',
-                    name: 'Jurusan.Create',
+                    name: 'Major.Create',
                     component: () => import('../views/Major/Create.vue')
                 },
                 {
                     path: '/edit-jurusan/:id',
-                    name: 'Jurusan.Edit',
+                    name: 'Major.Edit',
                     component: () => import('../views/Major/Edit.vue')
                 },
                 {
