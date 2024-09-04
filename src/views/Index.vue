@@ -37,11 +37,11 @@
             @click="dropdown()"
           >
             <div class="hidden lg:block">
-              <p><span>hai, </span>Erlang Andriyanputra</p>
+              <p><span>hai, </span>{{ user.username }}</p>
             </div>
             <div>
               <img
-                :src="'dummy.avif'"
+                :src="'/storage/' + user.image"
                 alt=""
                 class="w-10 h-10 object-cover rounded-full"
               />
@@ -64,11 +64,13 @@
         >
       </li>
       <li>
-        <button
-          class="w-full flex border-b px-3 py-3 items-center gap-3 text-red-500 hover:bg-red-500 hover:text-white hover:duration-150"
-        >
-          <i class="fa-solid fa-arrow-right-from-bracket"></i>Sign Out
-        </button>
+        <form @submit.prevent="signout()">
+          <button
+            class="w-full flex border-b px-3 py-3 items-center gap-3 text-red-500 hover:bg-red-500 hover:text-white hover:duration-150"
+          >
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>Sign Out
+          </button>
+        </form>
       </li>
     </ul>
   </div>
@@ -145,10 +147,12 @@
 </style>
 
 <script setup>
-import { ref, watch } from "vue";
+import { ref, watch, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
+import useAuth from "../service/auth";
 
 const route = useRoute();
+const { signout, user, authUser } = useAuth();
 
 function isActive(name) {
   // Memeriksa apakah path saat ini termasuk href
@@ -193,8 +197,6 @@ const dropdownItem = [
     href: "/tentang-elibin",
   },
 ];
-
-const page = null
 
 const sideItem = [
   {
@@ -258,4 +260,8 @@ const sideItem = [
     href: "/admin/" + 1,
   },
 ];
+
+onMounted(() => {
+  authUser()
+})
 </script>

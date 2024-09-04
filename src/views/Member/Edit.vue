@@ -111,7 +111,7 @@
         </div>
         <div class="flex flex-row justify-between pb-8 capitalize">
           <router-link
-            to="/anggota"
+            to="/anggota/1"
             class="w-max h-max px-6 py-3 rounded-xl bg-red-500 text-white hover:bg-red-400 hover:duration-150"
             >batal</router-link
           >

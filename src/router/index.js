@@ -11,15 +11,27 @@ import Class from '../views/Class/Index.vue'
 import Major from '../views/Major/Index.vue'
 import Admin from '../views/Admin/Index.vue'
 import Profile from '../views/Profile/Index.vue'
+import SignIn from '../views/Auth/SignIn.vue'
 
 const router = createRouter({
     history: createWebHistory(),
     routes: [
         {
+            path: '/signin',
+            name: 'Auth.Signin',
+            component: SignIn,
+            meta: {
+                guestRequired: true
+            }
+        },
+        {
             path: '/',
             name: 'Index',
             redirect: { path: '/dashboard' },
             component: Index,
+            meta: {
+                authRequired: true
+            },
             children: [
                 {
                     path: '/dashboard',
@@ -225,6 +237,26 @@ const router = createRouter({
             ]
         }
     ]
+})
+
+router.beforeEach((to, from, next) => {
+    const isLoggedIn = localStorage.getItem("auth_token")
+
+    if (to.matched.some((record) => record.meta.guestRequired)) {
+        if (isLoggedIn == null) {
+            next()
+        } else {
+            next("/dashboard")
+        }
+    } else if (to.matched.some((record) => record.meta.authRequired)) {
+        if (isLoggedIn == null) {
+            next("/signin")
+        } else {
+            next()
+        }
+    } else {
+        next()
+    }
 })
 
 export default router
