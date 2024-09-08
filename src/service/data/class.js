@@ -10,6 +10,7 @@ export default function useClass() {
     const { accepted, rejected, confirm } = useSwal()
     const router = useRouter()
     const route = useRoute()
+    const count = ref([])
 
     async function getClass(search) {
         if(search == undefined) {
@@ -18,6 +19,7 @@ export default function useClass() {
         const response = await axios.get(`/api/v1/class?page=${route.params.page}&search=${search}`)
         classData.value = response.data.data.data
         totalPage.value = response.data.data.last_page
+        count.value = response.data.count
     }
 
     async function getAllClass() {
@@ -76,6 +78,7 @@ export default function useClass() {
         edit,
         destroy,
         totalPage,
-        getAllClass
+        getAllClass,
+        count
     }
 }

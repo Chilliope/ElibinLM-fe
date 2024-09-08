@@ -9,6 +9,7 @@ export default function useVisitor() {
     const route = useRoute()
     const router = useRouter()
     const { accepted, rejected, confirm } = useSwal()
+    const count = ref([])
 
     async function getVisitor(search) {
         if(search == undefined) {
@@ -17,6 +18,7 @@ export default function useVisitor() {
         const response = await axios.get(`/api/v1/visitor?page=${route.params.page}&search=${search}`)
         visitor.value = response.data.data.data
         totalPage.value = response.data.data.last_page
+        count.value = response.data.count
     }
 
     async function show() {
@@ -67,6 +69,7 @@ export default function useVisitor() {
         create,
         update,
         destroy,
-        totalPage
+        totalPage,
+        count
     }
 }

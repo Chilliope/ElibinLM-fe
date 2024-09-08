@@ -9,6 +9,7 @@ export default function useBook() {
     const route = useRoute()
     const book = ref([])
     const totalPage = ref([])
+    const count = ref([])
 
     async function getBook(search) {
         if(search == undefined) {
@@ -18,6 +19,7 @@ export default function useBook() {
         const response = await axios.get(`/api/v1/book?page=${route.params.page}&search=${search}`)
         book.value = response.data.data.data
         totalPage.value = response.data.data.last_page
+        count.value = response.data.count
     }
 
     async function show() {
@@ -70,6 +72,7 @@ export default function useBook() {
         create,
         update,
         destroy,
-        totalPage
+        totalPage,
+        count
     }
 }

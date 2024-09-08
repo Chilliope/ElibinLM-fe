@@ -9,6 +9,7 @@ export default function useMajor() {
     const { accepted, rejected, confirm } = useSwal()
     const route = useRoute()
     const router = useRouter()
+    const count = ref([])
 
     async function getMajor(search) {
         if(search == undefined) {
@@ -17,6 +18,7 @@ export default function useMajor() {
         const response = await axios.get(`/api/v1/major?page=${route.params.page}&search=${search}`)
         major.value = response.data.message.data
         totalPage.value = response.data.message.last_page
+        count.value = response.data.count
     }
 
     async function getAllMajor() {
@@ -74,6 +76,7 @@ export default function useMajor() {
         edit,
         destroy,
         totalPage,
-        getAllMajor
+        getAllMajor,
+        count
     }
 }

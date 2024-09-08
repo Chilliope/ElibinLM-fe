@@ -9,6 +9,7 @@ export default function useMember() {
     const { accepted, rejected, confirm } = useSwal()
     const route = useRoute()
     const router = useRouter()
+    const count = ref([])
 
     async function getMember(search) {
         if(search == undefined) {
@@ -17,6 +18,7 @@ export default function useMember() {
         const response = await axios.get(`/api/v1/member?page=${route.params.page}&search=${search}`)
         member.value = response.data.data.data
         totalPage.value = response.data.data.last_page
+        count.value = response.data.count
     }
 
     async function show() {
@@ -67,6 +69,7 @@ export default function useMember() {
         show,
         update,
         destroy,
-        totalPage
+        totalPage,
+        count
     }
 }

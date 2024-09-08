@@ -9,6 +9,7 @@ export default function useRack() {
     const { accepted, rejected, confirm } = useSwal()
     const route = useRoute()
     const router = useRouter()
+    const count = ref([])
     
     async function getRack(search) {
         if(search == undefined) {
@@ -18,6 +19,7 @@ export default function useRack() {
         const response = await axios.get(`/api/v1/rack?page=${route.params.page}&search=${search}`)
         rack.value = response.data.data.data
         totalPage.value = response.data.data.last_page
+        count.value = response.data.count
     }
 
     async function getAllRack() {
@@ -73,6 +75,7 @@ export default function useRack() {
         edit,
         destroy,
         totalPage,
-        getAllRack
+        getAllRack,
+        count
     }
 }

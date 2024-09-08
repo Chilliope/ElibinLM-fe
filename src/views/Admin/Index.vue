@@ -19,7 +19,7 @@
     >
       <div class="flex flex-col gap-3">
         <h6 class="capitalize lg:text-lg">total admin</h6>
-        <div class="text-6xl">536</div>
+        <div class="text-6xl">{{ count }}</div>
       </div>
     </div>
     <div
@@ -139,7 +139,7 @@ import useAdmin from "../../service/data/admin";
 import { useRoute } from "vue-router";
 
 const route = useRoute();
-const { admin, getAdmin, destroy, totalPage } = useAdmin();
+const { admin, getAdmin, destroy, totalPage, count } = useAdmin();
 const search = ref('')
 
 

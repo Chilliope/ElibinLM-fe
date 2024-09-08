@@ -19,7 +19,7 @@
     >
       <div class="flex flex-col gap-3">
         <h6 class="capitalize lg:text-lg">total jurusan</h6>
-        <div class="text-6xl">536</div>
+        <div class="text-6xl">{{ count }}</div>
       </div>
     </div>
     <div
@@ -139,7 +139,7 @@ import useMajor from "../../service/data/major";
 import { useRoute, useRouter } from 'vue-router'
 
 const route = useRoute()
-const { major, getMajor, destroy, totalPage } = useMajor();
+const { major, getMajor, destroy, totalPage, count } = useMajor();
 const search = ref('')
 
 

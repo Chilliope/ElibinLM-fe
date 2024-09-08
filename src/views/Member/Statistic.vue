@@ -35,6 +35,7 @@
     </div>
     <div
       class="w-full px-16 overflow-x-scroll overflow-y-hidden mt-6 h-80"
+      ref="statsExport"
     >
       <div class="w-max">
         <div class="w-full h-64 border-l-2 border-b-2 border-black"></div>
@@ -47,14 +48,17 @@
           <li>10</li>
           <li>0</li>
         </ul>
-        <ul class="relative -top-[32.1rem] left-2 flex gap-3">
+        <ul class="relative -top-[32.1rem] left-2 flex items-end h-[281px] gap-3">
           <li
-            class="flex flex-col w-max h-[280px] justify-end items-center gap-[8px]"
-            v-for="item in 32"
-            :key="item"
+            class="flex flex-col w-max justify-end items-center gap-[8px]"
+            v-for="(item, class_fix) in statsData"
+            :key="class_fix"
           >
-            <div class="bg-blue-500 w-6 h-64 bar-animation"></div>
-            <small class="text-xs uppercase">xii pplg b</small>
+            <div class="bg-blue-500 w-6 bar-animation" 
+            :style="'height:' + item.count + 'px;'"
+            ></div>
+            <small class="text-xs uppercase">{{ class_fix }}</small>
+            <!-- <small>{{ item.count }}</small> -->
           </li>
         </ul>
       </div>
@@ -81,25 +85,56 @@
   }
 }
 </style>
-
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
+import useStats from "../../service/data/stats";
+
+const { statsData, member } = useStats()
+
+onMounted(() => {
+  member()
+});
 
 const statsExport = ref(null);
 async function exportPDF() {
   const stats = statsExport.value;
 
-  const canvas = await html2canvas(stats);
+  // date
+  const date = new Date()
+  const currentDate = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}(${date.getHours()}:${date.getMinutes()})`
 
-  // Initialize jsPDF
-  const pdf = new jsPDF("p", "mm", "a1");
+  // Capture the element at its actual size with a higher scale for better quality
+  const canvas = await html2canvas(stats, {
+    scale: 2, // Higher scale improves image quality
+    useCORS: true,
+    backgroundColor: null, // Optional: to handle background transparency if needed
+  });
 
-  // Add the captured image to the PDF
-  pdf.addImage(canvas.toDataURL("image/png"), "PNG", 0, 0, 210, 297);
+  // Get the original element width and height
+  const elementWidth = canvas.width;
+  const elementHeight = canvas.height;
 
-  // Save or open the PDF
-  pdf.save("statistic-export.pdf");
+  // Set padding (in pixels)
+  const padding = 2000;
+
+  // Calculate new width and height with padding
+  const pdfWidth = elementWidth + padding * 2;
+  const pdfHeight = elementHeight + padding * 2;
+
+  // Initialize jsPDF with custom page size
+  const pdf = new jsPDF({
+    orientation: 'p',
+    unit: 'px',
+    format: [pdfWidth, pdfHeight], // Set size to match element size with padding
+  });
+
+  // Add the image to the PDF with padding
+  pdf.addImage(canvas.toDataURL("image/png"), "PNG", padding, padding, elementWidth, elementHeight);
+
+  // Save the PDF
+  pdf.save(`stats-anggota-perpustakaan_${currentDate}.pdf`);
 }
+
 </script>

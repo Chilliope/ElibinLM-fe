@@ -28,8 +28,9 @@
         </li>
         <div
           class="bg-red-500 w-6 h-6 rounded-full grid place-content-center text-white text-xs relative right-4 top-2 border-2 border-white"
+          v-if="totalGate"
         >
-          32
+          {{ totalGate }}
         </div>
         <li>
           <button
@@ -53,7 +54,7 @@
   </nav>
   <div
     ref="dropdownEl"
-    class="bg-white w-44 h-max rounded-xl shadow-sm absolute right-6 top-16 overflow-hidden hidden"
+    class="bg-white w-44 h-max rounded-xl shadow-sm fixed right-6 top-16 overflow-hidden hidden z-10"
   >
     <ul class="w-full flex flex-col">
       <li v-for="item in dropdownItem" :key="item.name">
@@ -98,7 +99,7 @@
           <router-link
             :to="item.href"
             :class="[
-              'px-3 py-1 rounded-xl w-full flex items-center capitalize hover:bg-blue-100 hover:duration-150',
+              'text-slate-600 px-3 py-1 rounded-xl w-full flex items-center capitalize hover:bg-blue-100 hover:duration-150',
               isActive(item.name) ? 'bg-blue-500 text-white' : '',
             ]"
           >
@@ -150,9 +151,11 @@
 import { ref, watch, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import useAuth from "../service/auth";
+import useGate from "../service/data/gate";
 
 const route = useRoute();
 const { signout, user, authUser } = useAuth();
+const { totalGate, getAllBook } = useGate()
 
 function isActive(name) {
   // Memeriksa apakah path saat ini termasuk href
@@ -227,7 +230,7 @@ const sideItem = [
     icon: "fa-solid fa-clipboard",
     title: "peminjaman",
     name: 'Borrowing',
-    href: "/peminjaman",
+    href: "/peminjaman/" + 1,
   },
   {
     icon: "fa-solid fa-building",
@@ -263,5 +266,6 @@ const sideItem = [
 
 onMounted(() => {
   authUser()
+  getAllBook()
 })
 </script>

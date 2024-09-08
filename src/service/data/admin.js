@@ -9,6 +9,7 @@ export default function useAdmin() {
     const { accepted, rejected, confirm } = useSwal()
     const route = useRoute()
     const router = useRouter()
+    const count = ref([])
 
     async function getAdmin(search) {
         if(search == undefined) {
@@ -17,6 +18,7 @@ export default function useAdmin() {
         const response = await axios.get(`/api/v1/admin?page=${route.params.page}&search=${search}`)
         admin.value = response.data.data.data
         totalPage.value = response.data.data.last_page
+        count.value = response.data.count
     }
 
     async function create(payload) {
@@ -67,6 +69,7 @@ export default function useAdmin() {
         show,
         edit,
         destroy,
-        totalPage
+        totalPage,
+        count
     }
 }

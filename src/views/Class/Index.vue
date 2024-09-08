@@ -19,7 +19,7 @@
     >
       <div class="flex flex-col gap-3">
         <h6 class="capitalize lg:text-lg">total kelas</h6>
-        <div class="text-6xl">536</div>
+        <div class="text-6xl">{{ count }}</div>
       </div>
     </div>
     <div
@@ -143,7 +143,7 @@ import { useRoute, useRouter } from "vue-router";
 
 const route = useRoute();
 
-const { classData, getClass, destroy, totalPage } = useClass();
+const { classData, getClass, destroy, totalPage, count } = useClass();
 
 const search = ref('')
 

@@ -118,9 +118,17 @@ const router = createRouter({
                     component: () => import('../views/Visitor/Statistic.vue')
                 },  
                 {
-                    path: '/peminjaman',
+                    path: '/peminjaman/:page',
                     name: 'Borrowing.Index',
-                    component: Borrowing
+                    component: Borrowing,
+                    beforeEnter: (to, from, next) => {
+                        const page = parseInt(to.params.page, 10);
+                        if (isNaN(page) || page <= 0) {
+                            next('/peminjaman/1'); // Redirect to /peminjaman/1 if :page is not valid
+                        } else {
+                            next(); // Continue to the intended route
+                        }
+                    },
                 },
                 {
                     path: '/pre-peminjaman',

@@ -14,7 +14,7 @@
             <div class="flex flex-col gap-3">
                 <h6 class="capitalize lg:text-lg">total anggota perpustakaan</h6>
                 <div class="text-6xl">
-                    536
+                    {{ count }}
                 </div>
             </div>
         </div>
@@ -118,7 +118,7 @@ import { useRoute } from 'vue-router'
 import useMember from '../../service/data/member'
 
 const route = useRoute()
-const { member, getMember, destroy, totalPage } = useMember()
+const { member, getMember, destroy, totalPage, count } = useMember()
 const search = ref('')
 
 

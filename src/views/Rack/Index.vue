@@ -17,7 +17,7 @@
     >
       <div class="flex flex-col gap-3">
         <h6 class="capitalize lg:text-lg">total rak buku</h6>
-        <div class="text-6xl">536</div>
+        <div class="text-6xl">{{ count }}</div>
       </div>
     </div>
     <div
@@ -132,7 +132,7 @@ import { onMounted, watch, ref } from "vue";
 import useRack from "../../service/data/rack";
 import { useRoute, useRouter } from "vue-router";
 
-const { rack, getRack, destroy, totalPage } = useRack();
+const { rack, getRack, destroy, totalPage, count } = useRack();
 const route = useRoute();
 
 const search = ref('');
