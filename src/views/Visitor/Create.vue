@@ -30,13 +30,13 @@
           />
         </div>
         <div class="flex flex-col">
-          <label for="kelas" class="font-medium text-slate-500">kelas</label>
+          <label for="major" class="font-medium text-slate-500">Jurusan</label>
           <select
             class="text-black rounded-lg px-3 py-2 outline-none border border-slate-400"
-            id="kelas"
-            v-model="forms.class_id"
+            id="major"
+            v-model="forms.major_id"
           >
-            <option v-for="classData in classData" :key="classData.id" :value="classData.id">{{ classData.class_fix }}</option>
+            <option v-for="major in major" :key="major.id" :value="major.id">{{ major.major }}</option>
           </select>
         </div>
         <div class="flex flex-col">
@@ -73,20 +73,20 @@
 
 <script setup>
 import { ref, onMounted, reactive } from 'vue'
-import useClass from '../../service/data/class'
+import useMajor from '../../service/data/major'
 import useVisitor from '../../service/data/visitor'
 
-const { classData, getAllClass } = useClass()
+const { major, getAllMajor } = useMajor()
 const { create } = useVisitor()
 
 const forms = reactive({
   name: '',
-  class_id: '',
+  major_id: '',
   role: ''
 })
 
 onMounted(() => {
-  getAllClass()
+  getAllMajor()
 })
 
 function doCreate() {

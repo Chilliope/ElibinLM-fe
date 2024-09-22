@@ -9,6 +9,7 @@ import Library from '../views/Library/Index.vue'
 import Rack from '../views/Rack/Index.vue'
 import Class from '../views/Class/Index.vue'
 import Major from '../views/Major/Index.vue'
+import Subject from '../views/Subject/Index.vue'
 import Admin from '../views/Admin/Index.vue'
 import Profile from '../views/Profile/Index.vue'
 import SignIn from '../views/Auth/SignIn.vue'
@@ -16,6 +17,31 @@ import SignIn from '../views/Auth/SignIn.vue'
 const router = createRouter({
     history: createWebHistory(),
     routes: [
+        {
+            path: '/print-anggota',
+            name: 'Member.Print',
+            component: () => import('../views/Member/Print.vue')
+        },
+        {
+            path: '/print-qr/',
+            name: 'Books.PrintQr',
+            component: () => import('../views/Books/PrintQR.vue')
+        },
+        {
+            path: '/print-nomor/',
+            name: 'Books.PrintNumber',
+            component: () => import('../views/Books/PrintNumber.vue')
+        },
+        {
+            path: '/print-laporan/:fromDate/:toDate',
+            name: 'Borrow.Print',
+            component: () => import('../views/Borrowing/Print.vue')
+        },
+        {
+            path: '/print-laporan/',
+            name: 'Borrow.PrintAll',
+            component: () => import('../views/Borrowing/PrintAll.vue')
+        },
         {
             path: '/signin',
             name: 'Auth.Signin',
@@ -62,6 +88,21 @@ const router = createRouter({
                     component: () => import('../views/Books/Edit.vue')
                 },
                 {
+                    path: '/detail-koleksi/:id/:page',
+                    name: 'Books.Detail',
+                    component: () => import('../views/Books/Detail.vue')
+                },
+                {
+                    path: '/tambah-stok/:id',
+                    name: 'Books.AddCopy',
+                    component: () => import('../views/Books/AddCopy.vue')
+                },
+                {
+                    path: '/edit-stok/:id',
+                    name: 'Books.EditCopy',
+                    component: () => import('../views/Books/EditCopy.vue')
+                },
+                {
                     path: '/anggota/:page',
                     name: 'Member.Index',
                     component: Member,
@@ -88,6 +129,11 @@ const router = createRouter({
                     path: '/statistik-anggota',
                     name: 'Member.Statistic',
                     component: () => import('../views/Member/Statistic.vue')
+                },
+                {
+                    path: '/table-anggota/:page',
+                    name: 'Member.Table',
+                    component: () => import('../views/Member/Table.vue')
                 },
                 {
                     path: '/pengunjung/:page',
@@ -241,6 +287,21 @@ const router = createRouter({
                     path: '/profil',
                     name: 'Profile.Index',
                     component: Profile
+                },
+                {
+                    path: '/subjek/:page',
+                    name: 'Subject.Index',
+                    component: Subject
+                },
+                {
+                    path: '/tambah-subjek',
+                    name: 'Subject.Create',
+                    component: () => import('../views/Subject/Create.vue')
+                },
+                {
+                    path: '/edit-subjek/:id',
+                    name: 'Subject.Edit',
+                    component: () => import('../views/Subject/Edit.vue')
                 }
             ]
         }

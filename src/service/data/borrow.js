@@ -25,6 +25,17 @@ export default function useBorrow() {
     count.value = response.data.count;
   }
 
+  async function getAllBorrow(fromDate, toDate) {
+    const response = await axios.get(`/api/v1/getAllBorrow`, {
+      params: {
+        fromDate: fromDate,
+        toDate: toDate,
+      },
+    });
+
+    borrow.value = response.data.data;
+  }
+
   async function store(payload) {
     try {
       const response = await axios.post("/api/v1/borrower", payload);
@@ -51,12 +62,30 @@ export default function useBorrow() {
     }
   }
 
+  async function borrowReturn(id) {
+    const response = await confirm('Buku sudah dikembalikan?')
+
+    if(response.isConfirmed) {
+      try {
+        const response = await axios.put(`/api/v1/borrower-return/${id}`)
+        accepted('Buku sudah dikembalikan')
+        setInterval(() => {
+          location.reload()
+        }, 1500);
+      } catch (error) {
+        rejected('Terjadi kesalahan')
+      }
+    }
+  }
+
   return {
     store,
     borrow,
     getBorrow,
     totalPage,
     count,
-    destroy
+    destroy,
+    borrowReturn,
+    getAllBorrow
   };
 }

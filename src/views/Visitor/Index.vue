@@ -42,7 +42,7 @@
                             <small class="xl:text-base capitalize">{{ visitor.role }}</small>
                         </div>
                         <div>
-                            <p class="text-xs text-slate-600">{{ visitor.class.class_fix }}</p>
+                            <p class="text-xs text-slate-600">{{ visitor.major.major }}</p>
                         </div>
                     </div>
                     <div class="flex flex-row gap-3 h-full ">

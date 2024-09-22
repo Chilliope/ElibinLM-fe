@@ -29,13 +29,13 @@
           />
         </div>
         <div class="flex flex-col">
-          <label for="kelas" class="font-medium text-slate-500">kelas</label>
+          <label for="major" class="font-medium text-slate-500">jurusan</label>
           <select
             class="text-black rounded-lg px-3 py-2 capitalize outline-none border border-slate-400"
-            id="kelas"
-            v-model="visitor.class_id"
+            id="major"
+            v-model="visitor.major_id"
           >
-            <option v-for="classData in classData" :key="classData.id" :value="classData.id">{{ classData.class_fix }}</option>
+            <option v-for="major in major" :key="major.id" :value="major.id">{{ major.major }}</option>
           </select>
         </div>
         <div class="flex flex-col">
@@ -73,13 +73,13 @@
 <script setup>
 import { onMounted } from 'vue'
 import useVisitor from '../../service/data/visitor'
-import useClass from '../../service/data/class'
+import useMajor from '../../service/data/major'
 
-const { classData, getAllClass } = useClass()
+const { major, getAllMajor } = useMajor()
 const { visitor, show, update } = useVisitor()
 
 onMounted(() => {
-  getAllClass()
+  getAllMajor()
   show()
 })
 

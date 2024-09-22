@@ -4,7 +4,7 @@
       <router-link to="/dashboard" class="capitalize text-blue-500"
         >dashboard</router-link
       >/
-      <router-link to="/koleksi-buku" class="capitalize text-blue-500"
+      <router-link to="/koleksi-buku/1" class="capitalize text-blue-500"
         >koleksi buku</router-link
       >/
       <router-link to="/edit-buku" class="capitalize text-blue-500"
@@ -54,16 +54,6 @@
           />
         </div>
         <div class="flex flex-col">
-          <label for="ISBN" class="font-medium text-slate-500">ISBN</label>
-          <input
-            type="text"
-            class="text-black rounded-lg px-3 py-2 capitalize outline-none border border-slate-400"
-            placeholder="ISBN"
-            id="ISBN"
-            v-model="book.ISBN"
-          />
-        </div>
-        <div class="flex flex-col">
           <label for="tahun_terbit" class="font-medium text-slate-500"
             >tahun terbit</label
           >
@@ -73,18 +63,6 @@
             placeholder="tahun terbit"
             id="tahun_terbit"
             v-model="book.publication_year"
-          />
-        </div>
-        <div class="flex flex-col">
-          <label for="nomor_punggung_buku" class="font-medium text-slate-500"
-            >nomor punggung buku</label
-          >
-          <input
-            type="text"
-            class="text-black rounded-lg px-3 py-2 capitalize outline-none border border-slate-400"
-            placeholder="nomor punggung buku"
-            id="nomor_punggung_buku"
-            v-model="book.book_spine_number"
           />
         </div>
       </div>
@@ -127,16 +105,6 @@
           </div>
         </div>
         <div class="flex flex-col">
-          <label for="stok" class="font-medium text-slate-500">stok</label>
-          <input
-            type="number"
-            class="text-black rounded-lg px-3 py-2 capitalize outline-none border border-slate-400"
-            placeholder="stok"
-            id="stok"
-            v-model="book.stock"
-          />
-        </div>
-        <div class="flex flex-col">
           <label for="rak" class="font-medium text-slate-500">rak</label>
           <select
             class="text-black rounded-lg px-3 py-2 capitalize outline-none border border-slate-400"
@@ -147,6 +115,12 @@
             <option v-for="rack in rack" :key="rack.id" :value="rack.id">{{ rack.rack }}</option>
           </select>
         </div>
+        <div class="flex flex-col">
+            <label for="subject" class="font-medium text-slate-500">subjek</label>
+              <select class="text-black rounded-lg px-3 py-2 outline-none border border-slate-400" id="subject" v-model="book.subject_id">
+                  <option v-for="subject in subject" :key="subject.id" :value="subject.id">{{ subject.subject }}</option>
+              </select>
+            </div>
         <div class="flex flex-row justify-between pb-8 capitalize">
           <router-link
             to="/koleksi-buku/1"
@@ -168,9 +142,11 @@
 import { onMounted, ref } from 'vue'
 import useBook from '../../service/data/book'
 import useRack from '../../service/data/rack'
+import useSubject from '../../service/data/subject'
 
 const { book, show, update } = useBook()
 const { rack, getAllRack } = useRack()
+const { subject, getAllSubject } = useSubject()
 
 // Prepare to hold the file upload
 const selectedFile = ref(null)
@@ -178,6 +154,7 @@ const selectedFile = ref(null)
 onMounted(() => {
     show() // show detail buku
     getAllRack()
+    getAllSubject()
 })
 
 function handleFileUpload(event) {

@@ -70,6 +70,12 @@ let cardItem = [
         color: 'bg-purple-200 text-purple-600',
     },
     {
+        icon: 'fa-solid fa-tag',
+        name: 'Subject',
+        href: '/subjek/1',
+        color: 'bg-amber-200 text-amber-600',
+    },
+    {
         icon: 'fa-solid fa-clipboard-user',
         name: 'admin',
         href: '/admin/1',

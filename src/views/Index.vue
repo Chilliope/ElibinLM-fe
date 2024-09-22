@@ -78,7 +78,7 @@
   <div class="flex flex-row">
     <aside
       ref="sidebar"
-      class="fixed top-0 bg-white w-2/3 h-screen hidden lg:block lg:w-1/5 sidebarIsOpened z-10"
+      class="fixed top-0 bg-white w-2/3 h-screen hidden lg:block lg:w-1/5 sidebarIsOpened z-10 overflow-auto pb-6"
     >
       <div class="font-medium px-3 py-2 border-b flex flex-row justify-between">
         <router-link to="/dashboard" class="flex flex-col">
@@ -255,6 +255,12 @@ const sideItem = [
     title: "jurusan",
     name: 'Major',
     href: "/jurusan/" + 1,
+  },
+  {
+    icon: "fa-solid fa-tag",
+    title: "subjek",
+    name: 'Subject',
+    href: "/subjek/" + 1,
   },
   {
     icon: "fa-solid fa-clipboard-user",

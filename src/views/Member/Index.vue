@@ -18,7 +18,7 @@
                 </div>
             </div>
         </div>
-        <div ref="bookNav" class="bg-white w-4/5 h-20 rounded-3xl shadow-sm relative -top-10 flex flex-row items-center justify-evenly lg:justify-center lg:gap-3 z-0">
+        <div ref="bookNav" class="bg-white w-4/5 h-max py-4 rounded-3xl shadow-sm relative -top-10 grid grid-cols-2 gap-3 lg:gap-3 lg:px-3 lg:grid-cols-4 items-center justify-evenly lg:justify-center z-0">
             <router-link to="/tambah-anggota" class="flex flex-col items-center lg:flex-row lg:gap-3 lg:bg-white lg:px-3 lg:py-2 lg:rounded-xl lg:shadow-customBoxShadow">
                 <div class="bg-green-200 text-green-600 grid place-content-center text-2xl w-10 h-10 rounded-full"><i class="fa-solid fa-plus"></i></div>
                 <small class="text-slate-600 text-xs">Tambah Anggota</small>
@@ -26,6 +26,10 @@
             <router-link to="/statistik-anggota" class="flex flex-col items-center lg:flex-row lg:gap-3 lg:bg-white lg:px-3 lg:py-2 lg:rounded-xl lg:shadow-customBoxShadow">
                 <div class="bg-yellow-200 text-yellow-600 grid place-content-center text-2xl w-10 h-10 rounded-full"><i class="fa-solid fa-chart-simple"></i></div>
                 <small class="text-slate-600 text-xs">Statistik</small>
+            </router-link>
+            <router-link to="/table-anggota/1" class="flex flex-col items-center lg:flex-row lg:gap-3 lg:bg-white lg:px-3 lg:py-2 lg:rounded-xl lg:shadow-customBoxShadow">
+                <div class="bg-sky-200 text-sky-600 grid place-content-center text-2xl w-10 h-10 rounded-full"><i class="fa-solid fa-table"></i></div>
+                <small class="text-slate-600 text-xs">Table</small>
             </router-link>
         </div>
         <div class="bg-white w-full h-12 rounded-xl overflow-hidden shadow-sm">
@@ -116,6 +120,7 @@
 import { onMounted, watch, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import useMember from '../../service/data/member'
+
 
 const route = useRoute()
 const { member, getMember, destroy, totalPage, count } = useMember()

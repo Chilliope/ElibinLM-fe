@@ -5,25 +5,16 @@
     </div>
     <div class="w-full px-3 py-2 flex flex-col gap-3">
       <div class="flex flex-col lg:flex-row gap-3">
-        <div class="w-full lg:w-1/2">
-          <label for="name">Nama Peminjam</label>
+        <div class="w-full">
+          <label for="member_id">ID Anggota</label>
           <input
-            id="name"
-            v-model="forms.name"
+            id="member_id"
+            v-model="forms.member_id"
             type="text"
-            placeholder="Nama Peminjam"
+            placeholder="ID Anggota"
             class="border border-slate-400 outline-none px-3 py-2 w-full rounded-lg"
+            autofocus
           />
-        </div>
-        <div class="w-full lg:w-1/2">
-          <label for="class">Kelas</label>
-          <select
-            id="class"
-            v-model="forms.class_id"
-            class="border border-slate-400 outline-none px-3 py-2 w-full rounded-lg"
-          >
-            <option v-for="item in classData" :key="item.id" :value="item.id">{{ item.class_fix }}</option>
-          </select>
         </div>
       </div>
       <div class="flex flex-col lg:flex-row gap-3">
@@ -107,8 +98,7 @@ const { store } = useBorrow()
 const { classData, getAllClass } = useClass()
 const { bookGate, getAllBook, update, cancel } = useGate()
 const forms = reactive({
-    name: '',
-    class_id: '',
+    member_id: '',
     date_of_borrowing: '',
     date_of_return: ''
 })

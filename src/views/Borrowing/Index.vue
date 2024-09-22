@@ -4,7 +4,7 @@
       <router-link to="/dashboard" class="capitalize text-blue-500"
         >dashboard</router-link
       >/
-      <router-link to="/peminjaman" class="capitalize text-blue-500"
+      <router-link to="/peminjaman/1" class="capitalize text-blue-500"
         >peminjaman</router-link
       >/
     </div>
@@ -63,9 +63,10 @@
       class="bg-white w-full h-max rounded-xl overflow-hidden shadow-sm my-6 p-3"
     >
       <form
-        class="w-full flex flex-col lg:flex-row gap-3 items-center"
+        class="w-full flex flex-col gap-3"
         @submit.prevent="handleSearch"
       >
+      <div class="flex flex-col lg:flex-row gap-3">
         <div class="w-full lg:w-1/2">
           <label for="fromDate">Dari Tanggal</label>
           <input
@@ -89,28 +90,69 @@
             Cari
           </button>
         </div>
+      </div>
+      <div class="flex flex-col lg:flex-row gap-3">
+        <router-link v-if="fromDate && toDate" :to="'/print-laporan/' + fromDate + '/' + toDate" class="bg-red-500  text-white px-6 py-2 rounded-lg hover:bg-red-400 hover:duration-150">Print Laporan</router-link>
+        <router-link v-else :to="'/print-laporan/'" class="bg-red-500  text-white px-6 py-2 rounded-lg hover:bg-red-400 hover:duration-150">Print Laporan</router-link>
+      </div>
       </form>
     </div>
     <div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-4">
       <div v-for="(item, code) in borrow" :key="code">
-        <form @submit.prevent="destroy(code)" class="bg-white w-max h-max px-3 py-2 rounded-t-xl">
-          <button
-            class="text-red-500 text-xl hover:text-red-400 hover:duration-150"
-          >
-            <i class="fa-solid fa-trash"></i>
-          </button>
-        </form>
+        <div class="bg-white w-max h-max px-3 py-2 rounded-t-xl flex gap-8">
+          <form @submit.prevent="destroy(code)" class="">
+            <button
+              class="text-red-500 text-xl hover:text-red-400 hover:duration-150"
+            >
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </form>
+          <form @submit.prevent="borrowReturn(code)" class="">
+            <button
+              class="text-green-500 text-xl hover:text-green-400 hover:duration-150"
+            >
+              <i class="fa-solid fa-square-check"></i>
+            </button>
+          </form>
+        </div>
         <div class="bg-white px-6 py-2 shadow-sm rounded-b-xl rounded-r-xl">
           <div
             class="bg-red-500 w-full h-max rounded-xl text-white px-4 pt-2 pb-4"
-            v-if="item.date_borrow == item.date_return"
+            v-if="today >= item.date_return && item.status == 'dipinjam'"
           >
             <div class="flex flex-row justify-between">
               <div>
                 <div class="uppercase text-xl font-bold">No {{ code }}</div>
                 <div class="uppercase">
-                  <h6>{{ item.name }}</h6>
-                  <h5>{{ item.class }}</h5>
+                  <h6>{{ item.member.name }}</h6>
+                  <h5>{{ item.member.major }}</h5>
+                </div>
+                <ul
+                  class="list-disc px-8"
+                  v-for="book in item.books"
+                  :key="book"
+                >
+                  <li>{{ book.title }}({{ item.total }})</li>
+                </ul>
+              </div>
+              <div>
+                <span class="capitalize"
+                  >{{ formatDate(item.date_borrow) }},
+                  {{ item.date_borrow }}</span
+                >
+              </div>
+            </div>
+          </div>
+          <div
+            class="bg-green-500 w-full h-max rounded-xl text-white px-4 pt-2 pb-4"
+            v-else-if="item.status === 'dikembalikan'"
+          >
+            <div class="flex flex-row justify-between">
+              <div>
+                <div class="uppercase text-xl font-bold">No {{ code }}</div>
+                <div class="uppercase">
+                  <h6>{{ item.member.name }}</h6>
+                  <h5>{{ item.member.major }}</h5>
                 </div>
                 <ul
                   class="list-disc px-8"
@@ -136,8 +178,8 @@
               <div>
                 <div class="uppercase text-xl font-bold">No {{ code }}</div>
                 <div class="uppercase">
-                  <h6>{{ item.name }}</h6>
-                  <h5>{{ item.class }}</h5>
+                  <h6>{{ item.member.name }}</h6>
+                  <h5>{{ item.member.major }}</h5>
                 </div>
                 <ul
                   class="list-disc px-8"
@@ -219,10 +261,12 @@ import useBorrow from "../../service/data/borrow";
 import { useRoute, useRouter } from "vue-router";
 import useGate from "../../service/data/gate";
 
-const { getBorrow, borrow, totalPage, count, destroy } = useBorrow();
+const { getBorrow, borrow, totalPage, count, destroy, borrowReturn } = useBorrow();
 const { getAllBook, totalGate } = useGate()
 const route = useRoute();
 const router = useRouter();
+
+const today = new Date().toISOString().slice(0, 10); // Mendapatkan tanggal sekarang dalam format YYYY-MM-DD
 
 // Variabel untuk menampung nilai tanggal
 const fromDate = ref('');
@@ -231,6 +275,7 @@ const toDate = ref('');
 // Fungsi untuk menangani pencarian berdasarkan tanggal
 function handleSearch() {
   getBorrow(fromDate.value, toDate.value);
+  console.log(fromDate.value, toDate.value)
 }
 
 function formatDate(stringDate) {

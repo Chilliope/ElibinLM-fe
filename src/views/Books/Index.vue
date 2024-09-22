@@ -52,7 +52,7 @@
       <div
         v-for="book in book"
         :key="book.slug"
-        class="bg-white w-full h-mx px-6 py-3 flex gap-3 rounded-3xl shadow-sm"
+        class="bg-white w-full h-mx px-6 py-3 flex flex-col lg:flex-row gap-3 rounded-3xl shadow-sm"
       >
         <div>
           <img
@@ -71,8 +71,8 @@
                 penulis: <span>{{ book.writer }}</span>
               </div>
               <div class="capitalize">
-                stok buku: <span v-if="book.stock <= 0" class="text-red-500">{{ book.stock }}</span>
-                <span v-else class="text-slate-500">{{ book.stock }}</span>
+                stok buku: <span v-if="book.stock === 0" class="text-red-500">0</span>
+                <span v-else class="text-slate-500">{{ book.sub_book_count }}</span>
               </div>
               <div class="capitalize">
                 rak: <span>{{ book.rack.rack }}</span>
@@ -90,11 +90,16 @@
             ></router-link>
             <form @submit.prevent="destroy(book.slug)">
               <button
-                class="bg-red-200 text-red-600 px-3 py-2 rounded-lg hover:bg-red-100 hover:text-red-500 hover:duration-150"
+              class="bg-red-200 text-red-600 px-3 py-2 rounded-lg hover:bg-red-100 hover:text-red-500 hover:duration-150"
               >
-                <i class="fa-solid fa-trash"></i>
-              </button>
-            </form>
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </form>
+          <router-link
+            :to="'/detail-koleksi/' + book.id + '/1'"
+            class="bg-sky-200 text-sky-600 px-3 py-2 rounded-lg hover:bg-sky-100 hover:text-sky-500 hover:duration-150"
+            ><i class="fa-solid fa-book"></i
+          ></router-link>
             <form @submit.prevent="doAdd(book.id)">
               <button
                 class="bg-teal-200 text-teal-600 px-3 py-2 rounded-lg hover:bg-teal-100 hover:text-teal-500 hover:duration-150"

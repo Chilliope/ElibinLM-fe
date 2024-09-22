@@ -105,13 +105,13 @@
           </div>
         </div>
         <div class="flex flex-col">
-          <label for="kelas" class="font-medium text-slate-500">kelas</label>
+          <label for="major" class="font-medium text-slate-500">jurusan</label>
           <select
             class="text-black rounded-lg px-3 py-2 outline-none border border-slate-400"
-            id="kelas"
-            v-model="forms.class_id"
+            id="major"
+            v-model="forms.major_id"
           >
-            <option v-for="classData in classData" :key="classData.id" :value="classData.id">{{ classData.class_fix }}</option>
+            <option v-for="major in major" :key="major.id" :value="major.id">{{ major.major }}</option>
           </select>
         </div>
         <div class="flex flex-row justify-between pb-8 capitalize">
@@ -134,9 +134,9 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import useMember from '../../service/data/member'
-import useClass from '../../service/data/class'
+import useMajor from '../../service/data/major'
 
-const { classData, getAllClass } = useClass()
+const { major, getAllMajor } = useMajor()
 const { create } = useMember()
 
 const forms = ref({
@@ -146,12 +146,12 @@ const forms = ref({
   date_of_birth: '',
   phone: '',
   address: '',
-  class_id: '',
+  major_id: '',
   image: null
 })
 
 onMounted(() => {
-  getAllClass()
+  getAllMajor()
 })
 
 function handleFileUpload(event) {

@@ -39,10 +39,6 @@
                 <label for="publication_year" class="font-medium text-slate-500">tahun terbit</label>
                 <input required type="text" class="text-black rounded-lg px-3 py-2 outline-none border border-slate-400" placeholder="Tahun Terbit" id="publication_year" v-model="forms.publication_year">
             </div>
-            <div class="flex flex-col">
-                <label for="book_spine_number" class="font-medium text-slate-500">nomor punggung buku</label>
-                <input required type="text" class="text-black rounded-lg px-3 py-2 outline-none border border-slate-400" placeholder="Nomor Punggung Buku" id="book_spine_number" v-model="forms.book_spine_number">
-            </div>
         </div>
         <div class="flex flex-col gap-3 lg:w-1/2">
             <div class="flex flex-col">
@@ -60,13 +56,15 @@
                 </div>
             </div>
             <div class="flex flex-col">
-                <label for="stock" class="font-medium text-slate-500">stok</label>
-                <input required type="number" class="text-black rounded-lg px-3 py-2 outline-none border border-slate-400" placeholder="Stok" id="stock" v-model="forms.stock">
-            </div>
-            <div class="flex flex-col">
                 <label for="rack" class="font-medium text-slate-500">rak</label>
                 <select class="text-black rounded-lg px-3 py-2 outline-none border border-slate-400" id="rack" v-model="forms.rack_id">
                     <option v-for="rack in rack" :key="rack.id" :value="rack.id">{{ rack.rack }}</option>
+                </select>
+            </div>
+            <div class="flex flex-col">
+                <label for="subject" class="font-medium text-slate-500">subjek</label>
+                <select class="text-black rounded-lg px-3 py-2 outline-none border border-slate-400" id="subject" v-model="forms.subject_id">
+                    <option v-for="subject in subject" :key="subject.id" :value="subject.id">{{ subject.subject }}</option>
                 </select>
             </div>
             <div class="flex flex-row justify-between pb-8 capitalize">
@@ -82,9 +80,11 @@
 import { ref, onMounted } from 'vue'
 import useBook from '../../service/data/book'
 import useRack from '../../service/data/rack'
+import useSubject from '../../service/data/subject'
 
 const { create } = useBook()
 const { rack, getAllRack } = useRack()
+const { getAllSubject, subject } = useSubject()
 
 const forms = ref({
     title: '',
@@ -92,16 +92,16 @@ const forms = ref({
     publisher: '',
     ISBN: '',
     publication_year: '',
-    book_spine_number: '',
     page_size: '',
     information: '',
     image: null,
-    stock: '',
-    rack_id: ''
+    rack_id: '',
+    subject_id: ''
 })
 
 onMounted(() => {
     getAllRack()
+    getAllSubject()
 })
 
 function handleFileUpload(event) {

@@ -34,7 +34,6 @@ export default function useBook() {
             router.back()
         } catch (error) {
             rejected('Buku gagal dibuat')
-            router.back()
         }
     }
 
@@ -45,7 +44,6 @@ export default function useBook() {
             router.back()
         } catch (error) {
             rejected('Buku gagal diedit')
-            router.back()
         }
     }
 

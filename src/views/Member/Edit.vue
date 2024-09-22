@@ -69,7 +69,7 @@
             >nomor telepon</label
           >
           <input
-            type="number"
+            type="text"
             class="text-black rounded-lg px-3 py-2 outline-none border border-slate-400"
             placeholder="Nomor Telepon"
             id="nomor_telepon"
@@ -100,13 +100,13 @@
           </div>
         </div>
         <div class="flex flex-col">
-          <label for="kelas" class="font-medium text-slate-500">kelas</label>
+          <label for="jurusan" class="font-medium text-slate-500">kelas</label>
           <select
             class="text-black rounded-lg px-3 py-2 outline-none border border-slate-400"
-            id="kelas"
-            v-model="member.class_id"
+            id="jurusan"
+            v-model="member.major_id"
           >
-            <option v-for="classData in classData" :key="classData.id" :value="classData.id">{{ classData.class_fix }}</option>
+            <option v-for="major in major" :key="major.id" :value="major.id">{{ major.major }}</option>
           </select>
         </div>
         <div class="flex flex-row justify-between pb-8 capitalize">
@@ -128,18 +128,18 @@
 
 <script setup>
 import { onMounted, ref } from 'vue'
-import useClass from '../../service/data/class'
+import useMajor from '../../service/data/major'
 import useMember from '../../service/data/member'
 
 const { member, show, update } = useMember()
-const { classData, getAllClass } = useClass()
+const { major, getAllMajor } = useMajor()
 
 // Prepare to hold the file upload
 const selectedFile = ref(null)
 
 onMounted(() => {
   show()
-  getAllClass()
+  getAllMajor()
 })
 
 function handleFileUpload(event) {
