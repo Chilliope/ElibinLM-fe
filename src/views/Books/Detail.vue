@@ -23,7 +23,7 @@
       <form class="flex items-center">
         <input
           type="text"
-          placeholder="Cari ISBN..."
+          placeholder="Cari Kode..."
           class="w-full h-12 px-6 text-lg outline-none"
           v-model="search"
         />
@@ -42,13 +42,13 @@
       >
         Cetak Nomor Punggung
       </button>
-      <router-link :to="'/tambah-stok/' + route.params.id" class="bg-green-500 text-white rounded-lg px-6 py-2 hover:bg-green-400 hover:duration-150">Tambah Stok</router-link>
+      <router-link :to="'/tambah-copy/' + route.params.id" class="bg-green-500 text-white rounded-lg px-6 py-2 hover:bg-green-400 hover:duration-150">Tambah Stok</router-link>
     </div>
     <table class="my-4 table-auto w-full text-center">
       <thead class="bg-blue-500 text-white">
         <tr class="text-sm lg:text-base">
           <th>Pilih</th>
-          <th>ISBN</th>
+          <th>Kode</th>
           <th>Aksi</th>
         </tr>
       </thead>
@@ -66,9 +66,8 @@
               :checked="selectedSubBook.some(selectedSubBook => selectedSubBook.id === subBook.id)"
             />
           </td>
-          <td class="text-xs lg:text-base">{{ subBook.ISBN }}</td>
+          <td class="text-xs lg:text-base">{{ subBook.code }}</td>
           <td class="flex justify-center items-center gap-3 py-2">
-            <router-link :to="'/edit-stok/' + subBook.id" class="bg-yellow-500 text-white rounded-lg px-4 py-2 hover:bg-yellow-400 hover:duration-150">Edit</router-link>
             <form @submit.prevent="destroy(subBook.id)">
               <button class="bg-red-500 text-white rounded-lg px-4 py-2 hover:bg-red-400 hover:duration-150">Hapus</button>
             </form>
@@ -131,14 +130,26 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import useSubBook from '../../service/data/subBook'
 
 const route = useRoute()
 const router = useRouter()
-const { subBook, totalPage, getSubBook, destroy } = useSubBook()
+const { subBook, totalPage, getSubBook, destroy, create } = useSubBook()
 const selectedSubBook = ref([]); // Array untuk menyimpan anggota yang dipilih
+const search = ref('');
+
+watch(
+  () => route.params.page,
+  () => {
+    getSubBook(search.value)
+  }
+)
+
+watch(search, (newSearch) => {
+  getSubBook(newSearch); // Fetch data in real-time as the search input changes
+});
 
 onMounted(() => {
   getSubBook()

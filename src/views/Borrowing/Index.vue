@@ -129,10 +129,8 @@
                 </div>
                 <ul
                   class="list-disc px-8"
-                  v-for="book in item.books"
-                  :key="book"
                 >
-                  <li>{{ book.title }}({{ item.total }})</li>
+                  <li v-for="book in item.books" :key="book">{{ book.book_title }}({{ item.total }})</li>
                 </ul>
               </div>
               <div>

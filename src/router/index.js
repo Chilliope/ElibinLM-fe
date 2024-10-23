@@ -93,14 +93,9 @@ const router = createRouter({
                     component: () => import('../views/Books/Detail.vue')
                 },
                 {
-                    path: '/tambah-stok/:id',
-                    name: 'Books.AddCopy',
-                    component: () => import('../views/Books/AddCopy.vue')
-                },
-                {
-                    path: '/edit-stok/:id',
-                    name: 'Books.EditCopy',
-                    component: () => import('../views/Books/EditCopy.vue')
+                    path: '/tambah-copy/:id/',
+                    name: 'Books.Add',
+                    component: () => import('../views/Books/Add.vue')
                 },
                 {
                     path: '/anggota/:page',

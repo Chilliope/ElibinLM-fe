@@ -32,12 +32,12 @@
                 <input required type="text" class="text-black rounded-lg px-3 py-2 outline-none border border-slate-400" placeholder="Penerbit" id="publisher" v-model="forms.publisher">
             </div>
             <div class="flex flex-col">
-                <label for="ISBN" class="font-medium text-slate-500">ISBN</label>
-                <input required type="text" class="text-black rounded-lg px-3 py-2 outline-none border border-slate-400" placeholder="ISBN" id="ISBN" v-model="forms.ISBN">
-            </div>
-            <div class="flex flex-col">
                 <label for="publication_year" class="font-medium text-slate-500">tahun terbit</label>
                 <input required type="text" class="text-black rounded-lg px-3 py-2 outline-none border border-slate-400" placeholder="Tahun Terbit" id="publication_year" v-model="forms.publication_year">
+            </div>
+            <div class="flex flex-col">
+                <label for="isbn" class="font-medium text-slate-500">ISBN</label>
+                <input required type="text" class="text-black rounded-lg px-3 py-2 outline-none border border-slate-400" placeholder="ISBN" id="publication_year" v-model="forms.isbn">
             </div>
         </div>
         <div class="flex flex-col gap-3 lg:w-1/2">
@@ -48,6 +48,10 @@
             <div class="flex flex-col">
                 <label for="information" class="font-medium text-slate-500">keterangan</label>
                 <input required type="text" class="text-black rounded-lg px-3 py-2 outline-none border border-slate-400" placeholder="Keterangan" id="information" v-model="forms.information">
+            </div>
+            <div class="flex flex-col">
+                <label for="stock" class="font-medium text-slate-500">stok</label>
+                <input required type="number" class="text-black rounded-lg px-3 py-2 outline-none border border-slate-400" placeholder="Stok" id="information" v-model="forms.stock">
             </div>
             <div class="flex flex-col w-full">
                 <label for="image" class="font-medium text-slate-500">foto buku</label>
@@ -90,10 +94,11 @@ const forms = ref({
     title: '',
     writer: '',
     publisher: '',
-    ISBN: '',
+    isbn: '',
     publication_year: '',
     page_size: '',
     information: '',
+    stock: '',
     image: null,
     rack_id: '',
     subject_id: ''

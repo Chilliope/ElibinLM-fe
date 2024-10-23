@@ -65,6 +65,18 @@
             v-model="book.publication_year"
           />
         </div>
+        <div class="flex flex-col">
+          <label for="isbn" class="font-medium text-slate-500"
+            >ISBN</label
+          >
+          <input
+            type="text"
+            class="text-black rounded-lg px-3 py-2 capitalize outline-none border border-slate-400"
+            placeholder="ISBN"
+            id="isbn"
+            v-model="book.isbn"
+          />
+        </div>
       </div>
       <div class="flex flex-col gap-3 lg:w-1/2">
         <div class="flex flex-col">

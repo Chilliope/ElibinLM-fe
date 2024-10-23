@@ -10,8 +10,12 @@ export default function useSubBook() {
     const router = useRouter()
     const { accepted, rejected, confirm } = useSwal()
     
-    async function getSubBook() {
-        const response = await axios.get(`/api/v1/subBook/${route.params.id}?page=${route.params.page}`)
+    async function getSubBook(search) {
+        if(search == undefined) {
+            search = ''
+        }
+
+        const response = await axios.get(`/api/v1/subBook/${route.params.id}?page=${route.params.page}&search=${search}`)
         subBook.value = response.data.data.data
         totalPage.value = response.data.data.last_page
     }
@@ -21,6 +25,9 @@ export default function useSubBook() {
             const response = await axios.post(`/api/v1/subBook/${route.params.id}`, payload)
             accepted('Data berhasil dibuat')
             router.push(`/detail-koleksi/${route.params.id}/1`)
+            setInterval(() => {
+                window.location.reload()
+            }, 1500);
         } catch (error) {
             rejected('Data gagal dibuat')
         }
@@ -46,7 +53,7 @@ export default function useSubBook() {
 
         if(response.isConfirmed) {
             try {
-                const response = await axios.delete(`/api/v1/subBook/${route.params.id}`)
+                const response = await axios.delete(`/api/v1/subBook/${id}`)
                 accepted('Data berhasil dihapus')
                 setInterval(() => {
                     location.reload()

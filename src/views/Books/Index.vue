@@ -75,7 +75,10 @@
                 <span v-else class="text-slate-500">{{ book.sub_book_count }}</span>
               </div>
               <div class="capitalize">
-                rak: <span>{{ book.rack.rack }}</span>
+                rak: <span v-if="book.rack_id != null">{{ book.rack.rack }}</span>
+              </div>
+              <div class="capitalize">
+                ISBN: <span>{{ book.isbn }}</span>
               </div>
             </div>
             <div>
@@ -88,7 +91,7 @@
               class="bg-blue-200 text-blue-600 px-3 py-2 rounded-lg hover:bg-blue-100 hover:text-blue-500 hover:duration-150"
               ><i class="fa-regular fa-pen-to-square"></i
             ></router-link>
-            <form @submit.prevent="destroy(book.slug)">
+            <form @submit.prevent="destroy(book.id)">
               <button
               class="bg-red-200 text-red-600 px-3 py-2 rounded-lg hover:bg-red-100 hover:text-red-500 hover:duration-150"
               >
@@ -104,7 +107,7 @@
               <button
                 class="bg-teal-200 text-teal-600 px-3 py-2 rounded-lg hover:bg-teal-100 hover:text-teal-500 hover:duration-150"
               >
-                <i class="fa-solid fa-cart-plus"></i>
+                <i class="fa-solid fa-basket-shopping"></i>
               </button>
             </form>
           </div>

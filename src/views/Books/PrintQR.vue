@@ -2,10 +2,10 @@
   <div class="bg-white w-full h-screen grid grid-cols-2">
     <div
       v-for="subBook in subBooks"
-      :key="subBook.ISBN"
+      :key="subBook.code"
       class="bg-white border border-black w-full h-44 px-10"
     >
-      <svg :id="'barcode-' + subBook.ISBN"></svg>
+      <svg :id="'barcode-' + subBook.code"></svg>
     </div>
   </div>
 </template>
@@ -22,7 +22,7 @@ export default {
 
     onMounted(() => {
       subBooks.forEach((subBook) => {
-        JsBarcode(`#barcode-${subBook.ISBN}`, subBook.ISBN, {
+        JsBarcode(`#barcode-${subBook.code}`, subBook.code, {
           format: "CODE39",
           width: 2,
           height: 40,

@@ -82,7 +82,7 @@
         <!-- Tombol Previous -->
         <div>
           <router-link
-            :to="'' + (parseInt(route.params.page) - 1)"
+            :to="'' + parseInt(route.params.id) + '/' + (parseInt(route.params.page) - 1)"
             :class="{
               'text-blue-500': parseInt(route.params.page) > 1,
               'text-gray-500 pointer-events-none':
@@ -113,7 +113,7 @@
         <!-- Tombol Next -->
         <div>
           <router-link
-            :to="'' + (parseInt(route.params.page) + 1)"
+            :to="'' + parseInt(route.params.id) + '/' + (parseInt(route.params.page) + 1) "
             :class="{
               'text-blue-500': parseInt(route.params.page) < totalPage,
               'text-gray-500 pointer-events-none':

@@ -74,7 +74,7 @@
             >nomor telepon</label
           >
           <input
-            type="number"
+            type="text"
             class="text-black rounded-lg px-3 py-2 outline-none border border-slate-400"
             placeholder="Nomor Telepon"
             id="nomor_telepon"
